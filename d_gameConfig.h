@@ -27,6 +27,12 @@
 
 /*Game configuration structure*/
 
+extern char config_gamepath[128];
+extern char dataPath[128];
+extern char scorePath[128];
+extern char replayPath[128];
+extern char configPath[128];
+
 #define CFG_MAX_VOLUME 128
 
 struct gameCfgStruct

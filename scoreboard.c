@@ -32,6 +32,7 @@
 //
 #include "system_var_type.h"
 #include "d_scoreboard.h"
+#include "d_gameConfig.h"
 #include "str_utils.h"
 #include "scoreboard.h"
 //
@@ -49,8 +50,8 @@ scoreboard gameScoreBoards[SCOREBOARDS_NUMBER];
 
 char *scoreBoardsPath[SCOREBOARDS_NUMBER] =
 {
-     "./data/score/twoMinMode.score"
-    ,"./data/score/fiveMinMode.score"
+     "data/score/twoMinMode.score",
+     "data/score/fiveMinMode.score"
 };
 
 /********************************************
@@ -162,12 +163,12 @@ int loadScoreboards(void)
 {
     int boardNumber = 0;
     FILE *inFp = NULL;
-    char *filePath = NULL;
-    //
+    char filePath[128];
 
     for( boardNumber = 0 ; boardNumber < SCOREBOARDS_NUMBER ; boardNumber++)
     {
-        filePath = *(scoreBoardsPath+boardNumber);
+		snprintf(filePath, sizeof(filePath), "%s/%s", config_gamepath, scoreBoardsPath[boardNumber]);
+        //filePath = *(scoreBoardsPath+boardNumber);
 #ifdef DEBUG
         printf("[DEBUG]---- Loading scoreboard \"%s\" ----\n", filePath );
 #endif
@@ -256,8 +257,11 @@ int saveScoreData( FILE *inFp , scoreboard *board)
 int saveScoreboard( int boardNumber)
 {
     scoreboard *board = gameScoreBoards + boardNumber;
-    char *filePath = scoreBoardsPath[boardNumber];
+    //char *filePath = scoreBoardsPath[boardNumber];
+    char filePath[128]; 
     FILE *outFp;
+  
+    snprintf(filePath, sizeof(filePath), "%s/%s", config_gamepath, scoreBoardsPath[boardNumber]);
 
  //Open score file
     if( ( outFp = fopen( filePath , "w")) == NULL)

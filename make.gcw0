@@ -1,6 +1,6 @@
 #makefile for mipsel-gcc, building for GCW-ZERO
 P= Overheated
-CFLAGS= -O3 -I/opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/sysroot/usr/include/SDL
+CFLAGS= -O3 -I/opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/sysroot/usr/include/SDL -DLINUX
 OUTFILE= -o overheated_gcw0
 LDLIBS= -L/opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/sysroot/usr/lib/ -lSDL -lSDL_mixer -lm
 DEFINES=  

@@ -28,6 +28,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <unistd.h>
 //
 #include "d_gameConfig.h"
 #include "globalDefines.h"
@@ -36,6 +37,12 @@
 #include "audio.h"
 #include "music.h"
 #include "video.h"
+
+char config_gamepath[128];
+char dataPath[128];
+char scorePath[128];
+char replayPath[128];
+char configPath[128];
 
 //-------------------------------------------
 #define GAME_CFG_FILE_PATH "./data/config/game.cfg"
@@ -149,6 +156,29 @@ int getResModeInfo(unsigned mode , int *x , int *y)
 
 int loadGameCfg(void)
 {
+#ifdef LINUX
+	char homePath[128];
+	snprintf(homePath, sizeof(homePath), "%s", getenv("HOME"));
+	snprintf(config_gamepath, sizeof(config_gamepath), "%s/.config/overheated", homePath);
+	snprintf(dataPath, sizeof(dataPath), "%s/data", config_gamepath);
+	snprintf(scorePath, sizeof(scorePath), "%s/data/score", config_gamepath);
+	snprintf(replayPath, sizeof(replayPath), "%s/data/replay", config_gamepath);
+	snprintf(configPath, sizeof(configPath), "%s/data/config", config_gamepath);
+	
+	if(access( config_gamepath, F_OK ) == -1)  mkdir(config_gamepath, 0755);
+	if(access( dataPath, F_OK ) == -1)  mkdir(dataPath, 0755);
+	if(access( scorePath, F_OK ) == -1)  mkdir(scorePath, 0755);
+	if(access( replayPath, F_OK ) == -1)  mkdir(replayPath, 0755);
+	if(access( configPath, F_OK ) == -1)  mkdir(configPath, 0755);
+#else
+	snprintf(config_gamepath, sizeof(config_gamepath), ".");
+#endif
+	snprintf(dataPath, sizeof(dataPath), "%s/data", config_gamepath);
+	snprintf(scorePath, sizeof(scorePath), "%s/data/score", config_gamepath);
+	snprintf(replayPath, sizeof(replayPath), "%s/data/replay", config_gamepath);
+	snprintf(configPath, sizeof(configPath), "%s/data/config", config_gamepath);
+	
+	
     if(loadGameCfgFile( GAME_CFG_FILE_PATH , &gameConfiguration))
     {
         fprintf( stderr , "[ERROR] Loading game configuration\n");

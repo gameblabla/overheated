@@ -1,6 +1,6 @@
 #makefile gcc, building for UNIX-Like OSes running on PCs
 P= Overheated
-CFLAGS= -g -O3 `pkg-config --cflags SDL_mixer sdl`
+CFLAGS= -g -O3 `pkg-config --cflags SDL_mixer sdl` -DLINUX
 OUTFILE= -o overheated.x86
 LDLIBS= `pkg-config --libs SDL_mixer sdl` -lm
 DEFINES= -D PC

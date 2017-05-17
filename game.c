@@ -63,6 +63,8 @@
 #include "scoreboard.h"
 #include "nameInput.h"
 
+#include "d_gameConfig.h"
+
 //
 #define DEBUG
 #define FADE_STEP 5
@@ -132,6 +134,9 @@ void endStage(void)
 
 int startGame(int type)
 {
+    char filePath[128]; 
+    char filePath2[128]; 
+	
 	//init game variables
     gameType = type;
     gameStatus = ON_GOING;
@@ -157,7 +162,11 @@ int startGame(int type)
     if(   gameType == TWO_MINUTES_REPLAY
        || gameType == FIVE_MINUTES_REPLAY)
     {
-        if(loadGameReplay(modeReplayFiles[gameType]) != 0)
+		
+		snprintf(filePath, sizeof(filePath), "%s", config_gamepath);
+		snprintf(filePath2, sizeof(filePath2), "%s/%s", filePath, modeReplayFiles[gameType]);
+		
+        if(loadGameReplay(filePath2) != 0)
         {
             return -1;
         }
@@ -197,12 +206,16 @@ int startGame(int type)
     {
         stopJoypadRecording();
         if( rankScore(getScore(),whichScoreBoard(gameType)) == 1)
-            if(saveGameReplay(modeReplayFiles[gameType]) == 0)
+        {
+			snprintf(filePath, sizeof(filePath), "%s", config_gamepath);
+			snprintf(filePath2, sizeof(filePath2), "%s/%s", filePath, modeReplayFiles[gameType]);
+            if(saveGameReplay(filePath2) == 0)
             {
 #ifdef DEBUG
             printf("[DEBUG] Game replay saved\n");
 #endif
             }
+		}
     }
 
     if(   gameType == TWO_MINUTES_REPLAY
