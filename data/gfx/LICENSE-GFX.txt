@@ -1,0 +1,41 @@
+
+This Applies to the following files:
+
+**If I ACCIDENTALLY included something in that list that was not made by me (BrokenTestType)
+  please contact me at brokentesttype@gmail.com
+
+128x128enemies.bmp
+16x16bonus.bmp
+16x16bullets.bmp
+16x16effects.bmp
+16x16enemies.bmp
+32x32_effects.bmp
+32x32enemies.bmp
+64x64_effects.bmp
+64x64enemies.bmp
+80x80enemies.bmp
+8x8bullets.bmp
+8x8effects.bmp
+bullet1.bmp
+city.bmp
+city_alpha1.bmp
+city_platform.bmp
+empty_tileset.bmp
+ship.bmp
+spaceChrSet.bmp
+spacePlatform.bmp
+background.bmp
+ddl_logo1.bmp
+opt_cursor.bmp
+service_menu_bg.bmp
+
+Copyright BrokenTestType 2016-2017
+Licensed under Creative Commons BY-NC-SA 4.0
+https://creativecommons.org/licenses/by-nc-sa/4.0/
+
+Share — copy and redistribute the material in any medium or format
+Adapt — remix, transform, and build upon the material 
+You may not use the material for commercial purposes.
+
+
+

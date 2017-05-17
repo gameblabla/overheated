@@ -1,0 +1,607 @@
+#stage file
+
+#header
+
+fmtVersion: 01  # Format version
+stageTime:00:32:00 #Stage time ( minutes:seconds:milliseconds*10)
+charsets:data/gfx/chrSets.txt
+background:data/stages/space/spaceBG.bg
+background:data/stages/space/spacePlatform.bg
+
+#Body
+spawnTable:
+
+    delay: 00:00:30
+    number: 4
+    objectSpawn:x:000:y:-64:type:godrill
+    objectSpawn:x:080:y:-64:type:godrill
+    objectSpawn:x:160:y:-64:type:godrill
+    objectSpawn:x:240:y:-64:type:godrill
+
+    delay: 00:00:20
+    number: 3
+    objectSpawn:x:048:y:-64:type:godrill
+    objectSpawn:x:192:y:-64:type:godrill
+    objectSpawn:x:272:y:-64:type:godrill
+
+    delay: 00:00:20
+    number: 5
+    objectSpawn:x:000:y:-64:type:godrill
+    objectSpawn:x:030:y:-64:type:godrill
+    objectSpawn:x:100:y:-64:type:godrill
+    objectSpawn:x:200:y:-64:type:godrill
+    objectSpawn:x:260:y:-64:type:godrill
+
+    delay: 00:00:20
+    number: 4
+    objectSpawn:x:060:y:-64:type:godrill
+    objectSpawn:x:120:y:-64:type:godrill
+    objectSpawn:x:160:y:-64:type:godrill
+    objectSpawn:x:290:y:-64:type:godrill
+
+    ##################
+
+    delay: 00:00:20
+    number: 4
+    objectSpawn:x:000:y:-64:type:godrill
+    objectSpawn:x:080:y:-64:type:godrill
+    objectSpawn:x:160:y:-64:type:godrill
+    objectSpawn:x:240:y:-64:type:godrill
+
+    delay: 00:00:20
+    number: 3
+    objectSpawn:x:048:y:-64:type:godrill
+    objectSpawn:x:192:y:-64:type:godrill
+    objectSpawn:x:272:y:-64:type:godrill
+
+    delay: 00:00:20
+    number: 5
+    objectSpawn:x:000:y:-64:type:godrill
+    objectSpawn:x:030:y:-64:type:godrill
+    objectSpawn:x:100:y:-64:type:godrill
+    objectSpawn:x:200:y:-64:type:godrill
+    objectSpawn:x:260:y:-64:type:godrill
+
+    delay: 00:00:20
+    number: 4
+    objectSpawn:x:060:y:-64:type:godrill
+    objectSpawn:x:120:y:-64:type:godrill
+    objectSpawn:x:160:y:-64:type:godrill
+    objectSpawn:x:290:y:-64:type:godrill
+
+    ##################
+
+    delay: 00:00:20
+    number: 4
+    objectSpawn:x:000:y:-64:type:godrill
+    objectSpawn:x:080:y:-64:type:godrill
+    objectSpawn:x:160:y:-64:type:godrill
+    objectSpawn:x:240:y:-64:type:godrill
+
+    delay: 00:00:20
+    number: 3
+    objectSpawn:x:048:y:-64:type:godrill
+    objectSpawn:x:192:y:-64:type:godrill
+    objectSpawn:x:272:y:-64:type:godrill
+
+
+    delay: 00:00:01
+    number: 1
+    objectSpawn:x:60:y:80:type:haltSpawn
+
+    ##################
+
+	delay: 00:00:05
+	number: 1
+	objectSpawn:x:40:y:-16:type:haltSpawn
+
+    delay: 00:00:40
+    number:1
+    objectSpawn:x:-32:y:160:type:tirtasL
+    delay: 00:00:40
+    number:1
+    objectSpawn:x:-32:y:160:type:tirtasL
+    delay: 00:00:40
+    number:1
+    objectSpawn:x:-32:y:160:type:tirtasL
+    delay: 00:00:40
+    number:1
+    objectSpawn:x:-32:y:160:type:tirtasL
+    delay: 00:00:40
+    number:1
+    objectSpawn:x:-32:y:160:type:tirtasL
+    delay: 00:00:40
+    number:1
+    objectSpawn:x:-32:y:160:type:tirtasL
+    delay: 00:00:40
+    number:1
+    objectSpawn:x:-32:y:160:type:tirtasL
+    delay: 00:00:40
+    number:1
+    objectSpawn:x:-32:y:160:type:tirtasL
+
+    delay: 00:00:40
+    number:1
+    objectSpawn:x:320:y:160:type:tirtasR
+    delay: 00:00:40
+    number:1
+    objectSpawn:x:320:y:160:type:tirtasR
+    delay: 00:00:40
+    number:1
+    objectSpawn:x:320:y:160:type:tirtasR
+    delay: 00:00:40
+    number:1
+    objectSpawn:x:320:y:160:type:tirtasR
+    delay: 00:00:40
+    number:1
+    objectSpawn:x:320:y:160:type:tirtasR
+    delay: 00:00:40
+    number:1
+    objectSpawn:x:320:y:160:type:tirtasR
+    delay: 00:00:40
+    number:1
+    objectSpawn:x:320:y:160:type:tirtasR
+    delay: 00:00:40
+    number:1
+    objectSpawn:x:320:y:160:type:tirtasR
+
+	delay: 00:00:05
+	number: 1
+	objectSpawn:x:40:y:-16:type:haltSpawn
+
+    ##################
+
+    delay: 00:02:00
+    number: 1
+    objectSpawn:x:0:y:-16:type:R_archer
+    delay: 00:00:10
+    number: 1
+    objectSpawn:x:0:y:-16:type:R_archer
+    delay: 00:00:10
+    number: 1
+    objectSpawn:x:0:y:-16:type:R_archer
+
+    delay: 00:00:10
+    number: 1
+    objectSpawn:x:60:y:-16:type:R_archer
+    delay: 00:00:10
+    number: 1
+    objectSpawn:x:60:y:-16:type:R_archer
+    delay: 00:00:10
+    number: 1
+    objectSpawn:x:60:y:-16:type:R_archer
+
+    delay: 00:00:10
+    number: 1
+    objectSpawn:x:120:y:-16:type:R_archer
+    delay: 00:00:10
+    number: 1
+    objectSpawn:x:120:y:-16:type:R_archer
+    delay: 00:00:10
+    number: 1
+    objectSpawn:x:120:y:-16:type:R_archer
+
+    delay: 00:00:10
+    number: 1
+    objectSpawn:x:180:y:-16:type:R_archer
+    delay: 00:00:10
+    number: 1
+    objectSpawn:x:180:y:-16:type:R_archer
+    delay: 00:00:10
+    number: 1
+    objectSpawn:x:180:y:-16:type:R_archer
+
+    delay: 00:00:10
+    number: 1
+    objectSpawn:x:220:y:-16:type:R_archer
+    delay: 00:00:10
+    number: 1
+    objectSpawn:x:220:y:-16:type:R_archer
+    delay: 00:00:10
+    number: 1
+    objectSpawn:x:220:y:-16:type:R_archer
+
+    delay: 00:00:01
+    number: 1
+    objectSpawn:x:60:y:80:type:haltSpawn
+
+    ##################
+
+    delay: 00:00:30
+    number: 1
+    objectSpawn:x:320:y:-16:type:L_archer
+    delay: 00:00:10
+    number: 1
+    objectSpawn:x:320:y:-16:type:L_archer
+    delay: 00:00:10
+    number: 1
+    objectSpawn:x:320:y:-16:type:L_archer
+
+    delay: 00:00:10
+    number: 1
+    objectSpawn:x:260:y:-16:type:L_archer
+    delay: 00:00:10
+    number: 1
+    objectSpawn:x:260:y:-16:type:L_archer
+    delay: 00:00:10
+    number: 1
+    objectSpawn:x:260:y:-16:type:L_archer
+
+    delay: 00:00:10
+    number: 1
+    objectSpawn:x:200:y:-16:type:L_archer
+    delay: 00:00:10
+    number: 1
+    objectSpawn:x:200:y:-16:type:L_archer
+    delay: 00:00:10
+    number: 1
+    objectSpawn:x:200:y:-16:type:L_archer
+
+    delay: 00:00:10
+    number: 1
+    objectSpawn:x:140:y:-16:type:L_archer
+    delay: 00:00:10
+    number: 1
+    objectSpawn:x:140:y:-16:type:L_archer
+    delay: 00:00:10
+    number: 1
+    objectSpawn:x:140:y:-16:type:L_archer
+
+    delay: 00:00:10
+    number: 1
+    objectSpawn:x:100:y:-16:type:L_archer
+    delay: 00:00:10
+    number: 1
+    objectSpawn:x:100:y:-16:type:L_archer
+    delay: 00:00:10
+    number: 1
+    objectSpawn:x:100:y:-16:type:L_archer
+
+    delay: 00:00:01
+    number: 1
+    objectSpawn:x:60:y:80:type:haltSpawn
+
+    ##################
+
+    delay: 00:02:00
+    number: 1
+    objectSpawn:x:60:y:240:type:maraac
+
+    delay: 00:01:30
+    number: 1
+    objectSpawn:x:226:y:240:type:maraac
+
+    delay: 00:01:30
+    number: 1
+    objectSpawn:x:100:y:240:type:maraac
+
+    delay: 00:01:30
+    number: 1
+    objectSpawn:x:0:y:240:type:maraac
+
+    delay: 00:01:30
+    number: 1
+    objectSpawn:x:200:y:240:type:maraac
+
+    delay: 00:01:30
+    number: 1
+    objectSpawn:x:80:y:240:type:maraac
+
+    delay: 00:01:30
+    number: 1
+    objectSpawn:x:226:y:240:type:maraac
+
+
+    delay: 00:00:01
+    number: 1
+    objectSpawn:x:60:y:80:type:haltSpawn
+
+    ##################
+
+	delay: 00:00:20
+	number:20
+         objectSpawn:x:320:y:30:type:lovac
+         objectSpawn:x:336:y:46:type:lovac
+         objectSpawn:x:352:y:30:type:lovac
+         objectSpawn:x:368:y:46:type:lovac
+         objectSpawn:x:384:y:30:type:lovac
+         objectSpawn:x:400:y:46:type:lovac
+         objectSpawn:x:416:y:30:type:lovac
+         objectSpawn:x:432:y:46:type:lovac
+         objectSpawn:x:448:y:30:type:lovac
+         objectSpawn:x:464:y:46:type:lovac
+         objectSpawn:x:-16:y:30:type:lovac
+         objectSpawn:x:-32:y:46:type:lovac
+         objectSpawn:x:-48:y:30:type:lovac
+         objectSpawn:x:-64:y:46:type:lovac
+         objectSpawn:x:-80:y:30:type:lovac
+         objectSpawn:x:-96:y:46:type:lovac
+         objectSpawn:x:-112:y:30:type:lovac
+         objectSpawn:x:-128:y:46:type:lovac
+         objectSpawn:x:-144:y:30:type:lovac
+         objectSpawn:x:-160:y:46:type:lovac
+
+	delay: 00:00:05
+	number: 1
+	objectSpawn:x:40:y:-16:type:haltSpawn
+
+    ##################
+
+   
+
+    delay: 00:00:40
+    number: 2
+    objectSpawn:x:40:y:-32:type:starView
+    objectSpawn:x:280:y:-32:type:starView
+
+	delay: 00:00:05
+	number: 1
+	objectSpawn:x:40:y:-16:type:haltSpawn
+
+ ##################
+
+    delay: 00:00:30
+	number: 2
+	objectSpawn:x:20:y:240:type:jumpaLU
+	objectSpawn:x:280:y:240:type:jumpaRU
+
+    delay: 00:00:15
+	number: 2
+	objectSpawn:x:20:y:240:type:jumpaLU
+	objectSpawn:x:280:y:240:type:jumpaRU
+    delay: 00:00:15
+	number: 2
+	objectSpawn:x:20:y:240:type:jumpaLU
+	objectSpawn:x:280:y:240:type:jumpaRU
+    delay: 00:00:15
+	number: 2
+	objectSpawn:x:20:y:240:type:jumpaLU
+	objectSpawn:x:280:y:240:type:jumpaRU
+    delay: 00:00:15
+	number: 2
+	objectSpawn:x:20:y:240:type:jumpaLU
+	objectSpawn:x:280:y:240:type:jumpaRU
+    delay: 00:00:15
+	number: 2
+	objectSpawn:x:20:y:240:type:jumpaLU
+	objectSpawn:x:280:y:240:type:jumpaRU
+    delay: 00:00:15
+	number: 2
+	objectSpawn:x:20:y:240:type:jumpaLU
+	objectSpawn:x:280:y:240:type:jumpaRU
+    delay: 00:00:15
+	number: 2
+	objectSpawn:x:20:y:240:type:jumpaLU
+	objectSpawn:x:280:y:240:type:jumpaRU
+    delay: 00:00:15
+	number: 2
+	objectSpawn:x:20:y:240:type:jumpaLU
+	objectSpawn:x:280:y:240:type:jumpaRU
+    delay: 00:00:15
+	number: 2
+	objectSpawn:x:20:y:240:type:jumpaLU
+	objectSpawn:x:280:y:240:type:jumpaRU
+    delay: 00:00:15
+	number: 2
+	objectSpawn:x:20:y:240:type:jumpaLU
+	objectSpawn:x:280:y:240:type:jumpaRU
+    delay: 00:00:15
+	number: 2
+	objectSpawn:x:20:y:240:type:jumpaLU
+	objectSpawn:x:280:y:240:type:jumpaRU
+    delay: 00:00:15
+	number: 2
+	objectSpawn:x:20:y:240:type:jumpaLU
+	objectSpawn:x:280:y:240:type:jumpaRU
+    delay: 00:00:15
+	number: 2
+	objectSpawn:x:20:y:240:type:jumpaLU
+	objectSpawn:x:280:y:240:type:jumpaRU
+    delay: 00:00:15
+	number: 2
+	objectSpawn:x:20:y:240:type:jumpaLU
+	objectSpawn:x:280:y:240:type:jumpaRU
+    delay: 00:00:15
+	number: 2
+	objectSpawn:x:20:y:240:type:jumpaLU
+	objectSpawn:x:280:y:240:type:jumpaRU
+    delay: 00:00:15
+	number: 2
+	objectSpawn:x:20:y:240:type:jumpaLU
+	objectSpawn:x:280:y:240:type:jumpaRU
+    delay: 00:00:15
+	number: 2
+	objectSpawn:x:20:y:240:type:jumpaLU
+	objectSpawn:x:280:y:240:type:jumpaRU
+    delay: 00:00:15
+	number: 2
+	objectSpawn:x:20:y:240:type:jumpaLU
+	objectSpawn:x:280:y:240:type:jumpaRU
+    delay: 00:00:15
+	number: 2
+	objectSpawn:x:20:y:240:type:jumpaLU
+	objectSpawn:x:280:y:240:type:jumpaRU
+    delay: 00:00:15
+	number: 2
+	objectSpawn:x:20:y:240:type:jumpaLU
+	objectSpawn:x:280:y:240:type:jumpaRU
+
+	delay: 00:00:05
+	number: 1
+	objectSpawn:x:40:y:-16:type:haltSpawn
+
+    ##################
+
+
+    delay: 00:00:40
+    number: 2
+    objectSpawn:x:0:y:-64:type:tekkerz
+    objectSpawn:x:256:y:-64:type:tekkerz
+
+	delay: 00:00:05
+	number: 1
+	objectSpawn:x:40:y:-16:type:haltSpawn
+
+    ##################
+
+    delay: 00:00:00
+	number: 1
+	objectSpawn:x:230:y:-16:type:warningMsg
+
+    delay: 00:01:00
+	number: 1
+	objectSpawn:x:230:y:-64:type:nakser
+
+	delay: 00:02:00
+	number: 1
+	objectSpawn:x:40:y:-4:type:haltSpawn
+
+    ##################
+    
+	delay: 00:01:00
+	number: 6
+	objectSpawn:x:0:y:-16:type:petrus
+	objectSpawn:x:40:y:-16:type:petrus
+	objectSpawn:x:80:y:-16:type:petrus
+	objectSpawn:x:100:y:-16:type:petrus
+	objectSpawn:x:140:y:-16:type:petrus
+	objectSpawn:x:180:y:-16:type:petrus
+
+	delay: 00:00:20
+	number: 6
+	objectSpawn:x:0:y:-16:type:petrus
+	objectSpawn:x:40:y:-16:type:petrus
+	objectSpawn:x:80:y:-16:type:petrus
+	objectSpawn:x:100:y:-16:type:petrus
+	objectSpawn:x:140:y:-16:type:petrus
+	objectSpawn:x:180:y:-16:type:petrus
+
+    delay: 00:00:20
+	number: 6
+	objectSpawn:x:0:y:-16:type:petrus
+	objectSpawn:x:40:y:-16:type:petrus
+	objectSpawn:x:80:y:-16:type:petrus
+	objectSpawn:x:100:y:-16:type:petrus
+	objectSpawn:x:140:y:-16:type:petrus
+	objectSpawn:x:180:y:-16:type:petrus
+
+    delay: 00:00:20
+	number: 6
+	objectSpawn:x:0:y:-16:type:petrus
+	objectSpawn:x:40:y:-16:type:petrus
+	objectSpawn:x:80:y:-16:type:petrus
+	objectSpawn:x:100:y:-16:type:petrus
+	objectSpawn:x:140:y:-16:type:petrus
+	objectSpawn:x:180:y:-16:type:petrus
+
+    delay: 00:00:20
+	number: 6
+	objectSpawn:x:0:y:-16:type:petrus
+	objectSpawn:x:40:y:-16:type:petrus
+	objectSpawn:x:80:y:-16:type:petrus
+	objectSpawn:x:100:y:-16:type:petrus
+	objectSpawn:x:140:y:-16:type:petrus
+	objectSpawn:x:180:y:-16:type:petrus
+    delay: 00:00:20
+	number: 6
+	objectSpawn:x:0:y:-16:type:petrus
+	objectSpawn:x:40:y:-16:type:petrus
+	objectSpawn:x:80:y:-16:type:petrus
+	objectSpawn:x:100:y:-16:type:petrus
+	objectSpawn:x:140:y:-16:type:petrus
+	objectSpawn:x:180:y:-16:type:petrus
+
+    delay: 00:00:20
+	number: 6
+	objectSpawn:x:0:y:-16:type:petrus
+	objectSpawn:x:40:y:-16:type:petrus
+	objectSpawn:x:80:y:-16:type:petrus
+	objectSpawn:x:100:y:-16:type:petrus
+	objectSpawn:x:140:y:-16:type:petrus
+	objectSpawn:x:180:y:-16:type:petrus
+
+    delay: 00:00:20
+	number: 6
+	objectSpawn:x:0:y:-16:type:petrus
+	objectSpawn:x:40:y:-16:type:petrus
+	objectSpawn:x:80:y:-16:type:petrus
+	objectSpawn:x:100:y:-16:type:petrus
+	objectSpawn:x:140:y:-16:type:petrus
+	objectSpawn:x:180:y:-16:type:petrus
+
+    delay: 00:00:20
+	number: 6
+	objectSpawn:x:0:y:-16:type:petrus
+	objectSpawn:x:40:y:-16:type:petrus
+	objectSpawn:x:80:y:-16:type:petrus
+	objectSpawn:x:100:y:-16:type:petrus
+	objectSpawn:x:140:y:-16:type:petrus
+	objectSpawn:x:180:y:-16:type:petrus
+
+    delay: 00:00:20
+	number: 6
+	objectSpawn:x:0:y:-16:type:petrus
+	objectSpawn:x:40:y:-16:type:petrus
+	objectSpawn:x:80:y:-16:type:petrus
+	objectSpawn:x:100:y:-16:type:petrus
+	objectSpawn:x:140:y:-16:type:petrus
+	objectSpawn:x:180:y:-16:type:petrus
+
+
+	delay: 00:00:01
+	number: 1
+	objectSpawn:x:40:y:-4:type:haltSpawn
+
+###########################################
+
+	delay: 00:00:40
+	number: 1
+	objectSpawn:x:320:y:-40:type:bKnightR
+
+	delay: 00:00:20
+	number: 1
+	objectSpawn:x:320:y:00:type:bKnightR
+
+	delay: 00:00:20
+	number: 1
+	objectSpawn:x:320:y:40:type:bKnightR
+
+	delay: 00:00:20
+	number: 1
+	objectSpawn:x:320:y:80:type:bKnightR
+
+    ####
+
+	delay: 00:02:00
+	number: 1
+	objectSpawn:x:-36:y:-40:type:bKnightL
+
+	delay: 00:00:20
+	number: 1
+	objectSpawn:x:-36:y:00:type:bKnightL
+
+	delay: 00:00:20
+	number: 1
+	objectSpawn:x:-36:y:40:type:bKnightL
+
+	delay: 00:00:20
+	number: 1
+	objectSpawn:x:-36:y:80:type:bKnightL
+
+
+	delay: 00:00:20
+	number: 1
+	objectSpawn:x:40:y:-4:type:haltSpawn
+
+
+
+SpecialspawnTable:
+
+	delay: 01:32:00
+	number: 1
+	objectSpawn:x:40:y:40:type:bossWarningMsg
+	delay: 01:35:00
+	number: 1
+	objectSpawn:x:40:y:80:type:stage2Boss
+
+

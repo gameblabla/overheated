@@ -1,0 +1,6 @@
+
+charset:
+gfx:data/gfx/city.bmp
+tilesW: 8
+tilesH: 8
+

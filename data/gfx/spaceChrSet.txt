@@ -1,0 +1,6 @@
+
+charset:
+gfx:data/gfx/spaceChrSet.bmp
+tilesW: 16
+tilesH: 16
+
