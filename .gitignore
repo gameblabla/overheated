@@ -2,3 +2,5 @@
 *.x86
 *.elf
 win/
+opk/data
+opk/trajectories

@@ -158,13 +158,16 @@ int loadGameCfg(void)
 {
 #ifdef LINUX
 	char homePath[128];
+	char configPath[128];
 	snprintf(homePath, sizeof(homePath), "%s", getenv("HOME"));
+	snprintf(configPath, sizeof(configPath), "%s/.config", configPath);
 	snprintf(config_gamepath, sizeof(config_gamepath), "%s/.config/overheated", homePath);
 	snprintf(dataPath, sizeof(dataPath), "%s/data", config_gamepath);
 	snprintf(scorePath, sizeof(scorePath), "%s/data/score", config_gamepath);
 	snprintf(replayPath, sizeof(replayPath), "%s/data/replay", config_gamepath);
 	snprintf(configPath, sizeof(configPath), "%s/data/config", config_gamepath);
 	
+	if(access( configPath, F_OK ) == -1)  mkdir(configPath, 0755);
 	if(access( config_gamepath, F_OK ) == -1)  mkdir(config_gamepath, 0755);
 	if(access( dataPath, F_OK ) == -1)  mkdir(dataPath, 0755);
 	if(access( scorePath, F_OK ) == -1)  mkdir(scorePath, 0755);
@@ -178,12 +181,13 @@ int loadGameCfg(void)
 	snprintf(replayPath, sizeof(replayPath), "%s/data/replay", config_gamepath);
 	snprintf(configPath, sizeof(configPath), "%s/data/config", config_gamepath);
 	
-	
+	#ifndef GCW0
     if(loadGameCfgFile( GAME_CFG_FILE_PATH , &gameConfiguration))
     {
         fprintf( stderr , "[ERROR] Loading game configuration\n");
         exit(1);
     }
+    #endif
 
 	gameConfiguration.fullscreen = gameConfiguration.fullscreen ? 1 : 0;
 	gameConfiguration.scanlines = gameConfiguration.scanlines ? 1 : 0;

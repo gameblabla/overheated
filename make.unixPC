@@ -242,4 +242,5 @@ weapon.o: weapon.c globalDefines.h d_input.h d_GameObject.h d_Charset.h \
 
 clean:
 	rm *.o
-
+	rm  -r./opk/data
+	rm  -r./opk/trajectories
