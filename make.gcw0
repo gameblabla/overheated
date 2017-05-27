@@ -16,7 +16,8 @@ $(P): $(OBJECTS)
 buildopk:
 	mv overheated_gcw0 ./opk/overheated_gcw0
 	cp -r data ./opk/data
-	cp -r trajectories ./opk/trajectories
+	rm ./opk/data/config/controls.cfg
+	mv ./opk/data/config/controls_gcw.cfg ./opk/data/config/controls.cfg
 	mksquashfs ./opk overheated.opk -all-root -noappend -no-exports -no-xattrs
 
 OAM.o: OAM.c globalDefines.h d_GameObject.h d_Charset.h
@@ -251,4 +252,3 @@ weapon.o: weapon.c globalDefines.h d_input.h d_GameObject.h d_Charset.h \
 clean:
 	rm *.o overheated_gcw0
 	rm  -r./opk/data
-	rm  -r./opk/trajectories

@@ -181,14 +181,12 @@ int loadGameCfg(void)
 	snprintf(replayPath, sizeof(replayPath), "%s/data/replay", config_gamepath);
 	snprintf(configPath, sizeof(configPath), "%s/data/config", config_gamepath);
 	
-	#ifndef GCW0
     if(loadGameCfgFile( GAME_CFG_FILE_PATH , &gameConfiguration))
     {
         fprintf( stderr , "[ERROR] Loading game configuration\n");
         exit(1);
     }
-    #endif
-
+    
 	gameConfiguration.fullscreen = gameConfiguration.fullscreen ? 1 : 0;
 	gameConfiguration.scanlines = gameConfiguration.scanlines ? 1 : 0;
 #ifdef GCW0
@@ -212,7 +210,7 @@ int loadGameCfg(void)
     }
 
 #ifdef GCW0
-        setResMode(GCW0_DEFAULT_RES_MODE);
+	setResMode(GCW0_DEFAULT_RES_MODE);
 #endif
 
     /*Config audio subsystem*/
