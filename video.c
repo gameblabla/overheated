@@ -44,8 +44,8 @@
 char videoErrMsg[VIDEO_ERR_MSG_SIZE] = "\0";
 videoConf_t videoConf = //Video configuration structure
 {/*Default conf*/
-     640 //X
-    ,480 //Y
+     320 //X
+    ,240 //Y
     ,2   //Scale factor
     ,0   //Fullscreen
     ,0   //Game area X
@@ -219,11 +219,11 @@ int initVideo(void)
 					              , 0, 0, 0, 0
                                  );
     /*Create scanlines mask*/
-    if(videoConf.scanlines )
+    /*if(videoConf.scanlines )
     {
         SDL_Rect maskRect = { 0 , 0 , screen->w , screen->h };
         scanlinesMask = createScanLineMask( maskRect , videoConf.slValue );
-    }
+    }*/
     
     videoEnabled = 1;
 
@@ -269,10 +269,10 @@ void updateVideoScreen(void)
 			SDL_BlitSurface( gameFb , NULL , screen , &gamePos );
         }
 
-        if(NULL != scanlinesMask)
+       /* if(NULL != scanlinesMask)
             SDL_fadeSurface(  scanlinesMask 
                             , videoConf.slValue 
-                            , screen);
+                            , screen);*/
 
 		SDL_Flip(screen);// update the screen
 		//SDL_UpdateRect(screen,0,0,0,0);

@@ -40,11 +40,11 @@
 
 #define GM_SCREEN_TILE_SIZE 16	//Normal background tile size
 
-#define SCREEN_W 640
-#define SCREEN_H 480
-#define SCREEN_BPP 32
+#define SCREEN_W 320
+#define SCREEN_H 240
+#define SCREEN_BPP 16
 #define MAX_SC_VALUE SDL_ALPHA_OPAQUE //Max scanlines value
-#define DEFAULT_ZOOM 2
+#define DEFAULT_ZOOM 1
 
 #define FPS 60
 #define MENU_FPS FPS
