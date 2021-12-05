@@ -1,0 +1,27 @@
+PRGNAME     = index.html
+CC			= emcc
+RESOURCE_FOLDER = data/
+
+SRCDIR		= .
+VPATH		= $(SRCDIR)
+SRC_C		= $(foreach dir, $(SRCDIR), $(wildcard $(dir)/*.c))
+OBJ_C		= $(notdir $(patsubst %.c, %.o, $(SRC_C)))
+OBJS		= $(OBJ_C)
+
+CFLAGS		= -O3 -flto -I. -Ifont
+
+CXXFLAGS = $(CFLAGS)
+
+LDFLAGS     = -flto
+LDFLAGS		+= -s ENVIRONMENT=web -s STB_IMAGE=1 -s ASSERTIONS=1 --closure 1  -sALLOW_MEMORY_GROWTH=0 -s TOTAL_MEMORY=1400mb -sMALLOC="emmalloc"
+
+
+# Rules to make executable
+$(PRGNAME): $(OBJS)  
+	$(CC) $(CFLAGS)  -o $(PRGNAME) $^ $(LDFLAGS) --preload-file $(RESOURCE_FOLDER)
+
+$(OBJ_C) : %.o : %.c
+	$(CC) $(CFLAGS) -std=gnu99 -c -o $@ $<
+
+clean:
+	rm -f $(PRGNAME) *.o

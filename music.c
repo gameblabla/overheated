@@ -74,7 +74,7 @@ int playMusicTrack(int trackNumber)
 {
     char *filePath = getTrackFilePath(trackNumber);
     if( filePath == NULL)
-        return;
+        return 1;
 
     freeMusic();
     track_t *track = loadTrack(filePath);

@@ -24,8 +24,11 @@
 
 //
 #include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
 #include <SDL/SDL.h>
 //
+
 #include "globalDefines.h"
 #include "d_input.h"
 #include "system_var_type.h"
@@ -45,6 +48,10 @@
 #include "loadData.h"
 #include "SDL_utils.h"
 #include "l_objects.h"
+#include "background.h"
+#include "objects.h"
+
+extern void freeObject( GameObject *object);;
 //
 #define TERMINAL_ERROR_MESSAGES
 #define TERMINAL_STATUS_MESSAGES
@@ -52,9 +59,9 @@
 #define SYSTEM_VARS_NUMBER 0 //See str_utils.h
 #define STR_BUFFER_MAXSIZE 100 //See str_utils.h
 
-#define ERROR_HANDLING exit(-1);
+#define ERROR_HANDLING 
 
-#define DEBUG
+//#define DEBUG
 //---------------------------------------------------------------------//
 //---------------------------------------------------------------------//
 int load_ChrSetArray( char *filePath , charSetArray *charSets)
@@ -69,7 +76,6 @@ int load_ChrSetArray( char *filePath , charSetArray *charSets)
 	if( ( inFp = fopen( filePath , "rb")) == NULL)
 	{
 		fprintf( stderr , "\t[Error] while opening %s\n" , filePath);
-		exit(-1);
 	}
 
 	char finStrBuffer[STR_BUFFER_MAXSIZE]; //File string input buffer
@@ -91,11 +97,12 @@ int load_ChrSetArray( char *filePath , charSetArray *charSets)
 		//Load charset gfx path
 		if( searchString(inFp,"gfx",':') != 0)
 		{
+			/*
 #ifdef TERMINAL_ERROR_MESSAGES
 			fprintf( stderr , "\t[Error] charset %d gfx missing\n"
 				, i , filePath);
 #endif
-			ERROR_HANDLING
+			ERROR_HANDLING*/
 
 		}
 		FETCH_NEXT_STRING
@@ -1115,7 +1122,7 @@ int loadKeyList( FILE *inFp , char **names , int num , Uint16 **keys)
 #endif
 		}
 		fseek(inFp,fpMark,SEEK_SET);
-		return;
+		return 0;
 }
 
 int loadInputConf( char *filePath , inputConf *controlsMap)

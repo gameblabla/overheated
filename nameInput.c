@@ -193,9 +193,9 @@ int nameInputScreen(int score)
 
         updateVideoScreen();
         //
-		sleep_delay = mspf - (SDL_GetTicks()-ms);
+		/*sleep_delay = mspf - (SDL_GetTicks()-ms);
 		if(sleep_delay > 0)
-			SDL_Delay( sleep_delay );
+			SDL_Delay( sleep_delay );*/
 	}
 
     //Remove NULs ( except for the string terminator NUL!)

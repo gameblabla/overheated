@@ -51,7 +51,7 @@
 #include "time.h"
 #include "background.h"
 #include "announcer.h"
-
+#include "score.h"
 //-------------------------------------------
 
 /********************************************

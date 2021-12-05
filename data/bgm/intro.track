@@ -6,4 +6,4 @@ header:
 
 #Sections data
 
-section:file:./data/bgm/intro.ogg:loops:1
+section:file:data/bgm/intro.ogg:loops:1

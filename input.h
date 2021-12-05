@@ -25,7 +25,7 @@
 #ifndef INPUT_H
 #define INPUT_H
 
-int InitInputSystem(void);       //Init the game input system
+extern int initInputSystem(void);       //Init the game input system
 
 #ifdef D_INPUT_H
 

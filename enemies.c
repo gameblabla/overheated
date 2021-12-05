@@ -49,6 +49,7 @@
 #include "bonus.h"
 #include "debug.h"
 #include "time.h"
+#include "score.h"
 
 /********************************************/
 

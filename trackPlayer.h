@@ -28,7 +28,7 @@
 #define MAX_SECTION_PATH_LEN 1024
 struct trackSection_t
 {
-    char filePath[MAX_SECTION_PATH_LEN]; //Music file path (e.g ./data/*.ogg)
+    char filePath[MAX_SECTION_PATH_LEN]; //Music file path (e.g data/*.ogg)
     int  loops;                          //Number of loops for this section 
                                          //n >= 0 : Play n times
                                          //-1     : Infinite loop

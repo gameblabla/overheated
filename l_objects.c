@@ -29,6 +29,7 @@
 
 //
 #include <SDL/SDL.h>
+#include <string.h>
 //
 #include "globalDefines.h"
 #include "d_GameObject.h"

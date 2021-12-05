@@ -62,8 +62,12 @@
 #include "score.h"
 #include "scoreboard.h"
 #include "nameInput.h"
-
+#include "l_bgIns.h"
 #include "d_gameConfig.h"
+
+extern void setAdvertTime( unsigned frames);
+int game(char *startMsg , int stageNumber);
+extern void manageObjectsCollisions( GameObject *objects1 , int obj1Num ,GameObject *objects2 , int obj2Num);
 
 //
 #define DEBUG
@@ -549,9 +553,9 @@ int game(char *startMsg , int stageNumber)
         updateVideoScreen();
 
         //timing delay
-		sleep_delay = mspf - (SDL_GetTicks()-ms);
+		/*sleep_delay = mspf - (SDL_GetTicks()-ms);
 		if(sleep_delay > 0)
-			SDL_Delay( sleep_delay );
+			SDL_Delay( sleep_delay );*/
 
 	}//End main loop
 

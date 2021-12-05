@@ -29,9 +29,9 @@
 
 char *tracksFilePath[TRACKS_NUM] =
     {
-         "./data/bgm/intro.track"
-        ,"./data/bgm/2min.track"
-        ,"./data/bgm/5min.track"
+         "data/bgm/intro.track"
+        ,"data/bgm/2min.track"
+        ,"data/bgm/5min.track"
     };
 
 char *tracksName[TRACKS_NUM] =

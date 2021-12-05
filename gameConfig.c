@@ -45,7 +45,7 @@ char replayPath[128];
 char configPath[128];
 
 //-------------------------------------------
-#define GAME_CFG_FILE_PATH "./data/config/game.cfg"
+#define GAME_CFG_FILE_PATH "data/config/game.cfg"
 //-------------------------------------------
 
 gameCfgStruct gameConfiguration;
@@ -79,16 +79,16 @@ int setResMode(unsigned mode)
     if(mode > VIDEO_RES_MODES-1)
         return -1;
 
-    setResolution( resModesTable[mode][0]  //X
-                  ,resModesTable[mode][1]);//Y
-    setScaleFactor(resModesTable[mode][2]); 
-    setGameAreaPos( resModesTable[mode][3]
-                   ,resModesTable[mode][4]);
+    setResolution(320  //X
+                  ,240);//Y
+    setScaleFactor(0); 
+    setGameAreaPos( 0
+                   ,0);
 
     printf("[INFO] Using resolution mode %u (%ux%u)\n"
             ,mode
-            ,resModesTable[mode][0]
-            ,resModesTable[mode][1]
+            ,320
+            ,240
            );
 
     return 0;
@@ -135,7 +135,7 @@ Returns <0 if the mode is invalid
 int getResModeInfo(unsigned mode , int *x , int *y)
 {
     if( x == NULL || y == NULL)
-        return;
+        return -1;
 
     if(mode > VIDEO_RES_MODES-1)
         return -1;

@@ -26,15 +26,15 @@
 #ifndef D_FILEPATH_H
 #define D_FILEPATH_H
 
-#define TWO_MINMODE_BGM_FILE "./data/bgm/2min.ogg"
-#define FIVE_MINMODE_BGM_FILE "./data/bgm/5min.ogg"
+#define TWO_MINMODE_BGM_FILE "data/bgm/2min.ogg"
+#define FIVE_MINMODE_BGM_FILE "data/bgm/5min.ogg"
 /**/
-#define SFX_FILE_PATH "./data/sfx/audio.sfx"
+#define SFX_FILE_PATH "data/sfx/audio.sfx"
 /**/
 #define TWO_MINMODE_REPLAY_FILE "data/replay/twoMinMode.replay"
 #define FIVE_MINMODE_REPLAY_FILE "data/replay/fiveMinMode.replay"
 /**/
-#define SCORE_FONT_FILE "./data/gfx/fonts/cell_phone.font"
-#define ADVERTS_FONT_FILE "./data/gfx/fonts/announcements.font"
+#define SCORE_FONT_FILE "data/gfx/fonts/cell_phone.font"
+#define ADVERTS_FONT_FILE "data/gfx/fonts/announcements.font"
 
 #endif

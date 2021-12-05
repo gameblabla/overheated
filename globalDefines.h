@@ -42,7 +42,7 @@
 
 #define SCREEN_W 320
 #define SCREEN_H 240
-#define SCREEN_BPP 16
+#define SCREEN_BPP 32
 #define MAX_SC_VALUE SDL_ALPHA_OPAQUE //Max scanlines value
 #define DEFAULT_ZOOM 1
 
@@ -98,7 +98,7 @@
 
 //GAME RESOURCES
 
-#define SMALL_FONT  "./data/gfx/fonts/cell_phone.font"
-#define ADVERT_FONT "./data/gfx/fonts/announcements.font"
+#define SMALL_FONT  "data/gfx/fonts/cell_phone.font"
+#define ADVERT_FONT "data/gfx/fonts/announcements.font"
 
 #endif

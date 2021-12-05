@@ -65,29 +65,6 @@ int sfxVolume = MIX_MAX_VOLUME; //Sound effects volume
 int check_mixer_version(void)
 {
      	
-    const SDL_version *runtimeVer = Mix_Linked_Version();
-
-    SDL_version compiledVer ;
-    SDL_MIXER_VERSION(&compiledVer);
-
-    printf("[INFO] compiled with SDL_mixer v%d.%d.%d\n", 
-            compiledVer.major,
-            compiledVer.minor,
-            compiledVer.patch);
-    printf("[INFO] running with SDL_mixer v%d.%d.%d\n", 
-            runtimeVer->major,
-            runtimeVer->minor,
-            runtimeVer->patch);
-
-    if(     runtimeVer->major != compiledVer.major
-        ||  runtimeVer->minor != compiledVer.minor
-        ||  runtimeVer->patch != compiledVer.patch )
-    {
-        fprintf( stderr , "[WARNING] The SDL mixer version that this program was compiled"
-                          " with don't match with the runtime version\n\n");
-        return 1;
-    }
-
     return 0;
 }
 

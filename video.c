@@ -251,7 +251,7 @@ int blitToGameFb(  SDL_Surface *src
 
 void updateVideoScreen(void)
 {
-	    int zoom = videoConf.scaleFactor;
+	    //int zoom = videoConf.scaleFactor;
         SDL_Rect gamePos =
         {
              videoConf.gameAreaX
@@ -260,14 +260,15 @@ void updateVideoScreen(void)
         };
 
         /**/
-		if(zoom)
+        SDL_BlitSurface( gameFb , NULL , screen , &gamePos );
+		/*if(zoom)
         {
 			SDL_zoom( gameFb , screen , &gamePos , zoom);
         }
 		else
         {
 			SDL_BlitSurface( gameFb , NULL , screen , &gamePos );
-        }
+        }*/
 
        /* if(NULL != scanlinesMask)
             SDL_fadeSurface(  scanlinesMask 

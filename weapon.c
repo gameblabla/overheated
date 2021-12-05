@@ -42,6 +42,7 @@
 #include "weapon.h"
 #include "l_PLweapons.h"
 #include "globalVars.h"
+#include "bullets.h"
 //
 #include "debug.h"
 //

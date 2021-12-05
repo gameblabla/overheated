@@ -105,7 +105,7 @@ int initScoreboard(scoreboard *board)
         *lastScoreNext = newScore;
         lastScoreNext = &(newScore->next);            
     }
-    return;
+    return 0;
 }
 
 /********************************************

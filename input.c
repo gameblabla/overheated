@@ -269,7 +269,7 @@ int readJoypad(joypadStruct *controller)
 #endif
 
 		}while (SDL_PollEvent(&event));
-	return;
+	return 0;
 }
 
 //-------------------------------------------
@@ -317,6 +317,33 @@ int joypadHeld( joypadStruct *held , joypadStruct rawInput , joypadStruct lastFr
         *( uHeld+i ) = *( uRawInput+i ) & (~*( ulastFramePressed+i ));
     }
     
+    return 0;
+}
+
+//-------------------------------------------
+
+/*********************************************
+    addJoypadRecordEntry:
+**********************************************/
+
+static int addJoypadRecordEntry(joypadRecording *recording , joypadStruct joypadData)
+{
+    joypadRecordEntry *newEntry = malloc(sizeof(joypadRecordEntry));
+    newEntry->next = NULL;
+    newEntry->data = joypadData;
+
+    if( recording->record == NULL)
+    {
+        recording->record = newEntry;
+        recording->readPos = newEntry;
+    }
+    else
+    {
+        recording->last->next = newEntry;
+    }
+
+    recording->last = newEntry;
+
     return 0;
 }
 
@@ -410,32 +437,6 @@ int stopJoypadReplay(void)
     return 0;
 }
 
-//-------------------------------------------
-
-/*********************************************
-    addJoypadRecordEntry:
-**********************************************/
-
-int addJoypadRecordEntry(joypadRecording *recording , joypadStruct joypadData)
-{
-    joypadRecordEntry *newEntry = malloc(sizeof(joypadRecordEntry));
-    newEntry->next = NULL;
-    newEntry->data = joypadData;
-
-    if( recording->record == NULL)
-    {
-        recording->record = newEntry;
-        recording->readPos = newEntry;
-    }
-    else
-    {
-        recording->last->next = newEntry;
-    }
-
-    recording->last = newEntry;
-
-    return 0;
-}
 
 //-------------------------------------------
 

@@ -297,8 +297,7 @@ void freeNobjects( GameObject *objects , int num)
 	return;
 }
 
-void manageObjectsCollisions( GameObject *objects1 , int obj1Num
-			    ,GameObject *objects2 , int obj2Num)
+void manageObjectsCollisions( GameObject *objects1 , int obj1Num ,GameObject *objects2 , int obj2Num)
 {
 	register int i;
 	register int j;

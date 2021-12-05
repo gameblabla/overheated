@@ -48,6 +48,8 @@
 #include "globalVars.h"
 #include "sfx.h"
 #include "l_sfx.h"
+#include "spawn.h"
+#include "effects.h"
 
 //
 #include "debug.h"
@@ -284,9 +286,11 @@ void playerDeathSequence(controllerStruct *controller)
 
 void killPlayer( GameObject *player)
 {   
+		SDL_Rect ps;
+		ps.x = player->pos.x;
         playerAttributes *plAttributes = player->attributes;
         //Spawn explosion effect
-        spawnPlayerDeathExplosion(player->pos.x);
+        spawnPlayerDeathExplosion(ps);
         if(playerLives > 0) playerLives--;
         //Reset weapon
 		setWeapon( &plAttributes->weapon  , 1 , 0);

@@ -26,6 +26,9 @@
 #ifndef AUDIO_H
 #define AUDIO_H
 
+#include <SDL/SDL_mixer.h>
+#include "d_audio.h"
+
 int  check_mixer_version(void);  //-Check the SDL_Mixer version
 int  openAudio(void);	         //-Open the audio device
 void closeAudio(void);	         //-Close the audio device
@@ -35,9 +38,7 @@ int  getSFX_Volume(void);
 void incSFX_Volume(void);
 void decSFX_Volume(void);
 
-#ifdef D_AUDIO_H
 int  loadChunkArray(char *filePath , Mix_ChunkArray *array);	//-Load a list of samples
 void freeChunkArray(Mix_ChunkArray *array);			            //-Free a Mix_ChunkArray
-#endif
 
 #endif

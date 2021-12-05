@@ -26,6 +26,7 @@
 //
 #include <stdio.h>
 #include <stdlib.h>
+#include <cMath.h>
 #include <string.h>
 #include <SDL/SDL.h>
 //
@@ -196,10 +197,10 @@ int menu(void)
         blitToGameFb( bgBuffer , NULL , NULL);
         DRAW_OPTION(select);
 		updateVideoScreen();
-
+/*
 		sleep_delay = mspf - (SDL_GetTicks()-ms);
 		if(sleep_delay > 0)
-			SDL_Delay( sleep_delay );
+			SDL_Delay( sleep_delay );*/
 	}
 
 	RETURN(0)

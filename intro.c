@@ -46,7 +46,7 @@
 #include "game.h"
 #include "loadData.h"
 
-#define DDL_LOGO_GFX_PATH "./data/gfx/menu/ddl_logo1.bmp"
+#define DDL_LOGO_GFX_PATH "data/gfx/menu/ddl_logo1.bmp"
 
 /********************************************
 intro
@@ -123,9 +123,9 @@ int logoFade(char *logoPath, SDL_Rect *srcrect, SDL_Rect *dstrect
 
 		updateVideoScreen();
 
-		sleep_delay = mspf - (SDL_GetTicks()-ms);
+		/*sleep_delay = mspf - (SDL_GetTicks()-ms);
 		if(sleep_delay > 0)
-			SDL_Delay( sleep_delay );
+			SDL_Delay( sleep_delay );*/
     }
 
     SDL_FreeSurface(bgBuffer);

@@ -48,7 +48,7 @@
 #include "loadData.h"
 #include "scoreboard.h"
 #include "gameConfig.h"
-
+#include "trackPlayer.h"
 //-------------------------------------------
 
 #define STR_BUFFER_SIZE 1024
@@ -72,8 +72,8 @@
 
 
 //
-#define OPT_CURSOR_GFX_PATH "./data/gfx/menu/opt_cursor.bmp"
-#define MENU_BG_GFX_PATH "./data/gfx/menu/service_menu_bg.bmp"
+#define OPT_CURSOR_GFX_PATH "data/gfx/menu/opt_cursor.bmp"
+#define MENU_BG_GFX_PATH "data/gfx/menu/service_menu_bg.bmp"
 
 //Menu status
 
@@ -409,9 +409,9 @@ int serviceMenu(void)
 
 		updateVideoScreen();
 
-		sleep_delay = mspf - (SDL_GetTicks()-ms);
+	/*	sleep_delay = mspf - (SDL_GetTicks()-ms);
 		if(sleep_delay > 0)
-			SDL_Delay( sleep_delay );
+			SDL_Delay( sleep_delay );*/
     }
 
     RETURN(0);

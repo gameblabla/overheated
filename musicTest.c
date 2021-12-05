@@ -137,10 +137,10 @@ int musicTest(SDL_Surface *screen)
 
 		SDL_Flip(screen);// update the screen
 		//SDL_UpdateRect(screen,0,0,0,0);
-
+/*
 		sleep_delay = mspf - (SDL_GetTicks()-ms);
 		if(sleep_delay > 0)
-			SDL_Delay( sleep_delay );
+			SDL_Delay( sleep_delay );*/
 	}
 
 	RETURN(0)

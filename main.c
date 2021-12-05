@@ -45,7 +45,10 @@
 #include "gameConfig.h"
 #include "SDL_utils.h"
 #include "debug.h"
-
+#include "input.h"
+#ifdef __EMSCRIPTEN__
+#include <emscripten.h>
+#endif
 //-------------------------------------------
 
 /********************************************
@@ -80,6 +83,11 @@ static void printHelp(char **argv)
     main
 ************************************************/
 
+static int mainloop(void)
+{
+        intro();
+		menu();
+}
 
 int main(int argc , char **argv)
 {
@@ -187,11 +195,11 @@ int main(int argc , char **argv)
 
     //musicTest(screen);
 
-	while(1)
-    {
-        intro();
-		menu();
-    }
+#ifdef __EMSCRIPTEN__
+	emscripten_set_main_loop(mainloop, 60, 1);
+#else
+	mainloop();
+#endif
 
 	return 0;
 }

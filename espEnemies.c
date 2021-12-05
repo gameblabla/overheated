@@ -50,10 +50,12 @@
 #include "time.h"
 #include "announcer.h"
 #include "game.h"
-
-
+#include "score.h"
+#include "spawn.h"
+#include "trajectory.h"
 /*------------------------------------*/
 
+extern void makeEnemyHMissile(SDL_Rect pos , int pitch);
 
 #define BOSS1_ROUND_SIZE 24
 #define BOSS1_BULLET_VEL 2

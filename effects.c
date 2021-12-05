@@ -48,6 +48,7 @@
 #include "debug.h"
 #include "sfx.h"
 #include "announcer.h"
+#include "spawn.h"
 #include "game.h"
 #include "player.h"
 

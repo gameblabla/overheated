@@ -49,8 +49,8 @@
 #include "game.h"
 #include "loadData.h"
 
-//#define STAFF_ROLL_BG_PATH   "./data/gfx/menu/staffRoll.bmp"
-#define STAFF_ROLL_FONT_PATH "./data/gfx/fonts/staffRoll.font"
+//#define STAFF_ROLL_BG_PATH   "data/gfx/menu/staffRoll.bmp"
+#define STAFF_ROLL_FONT_PATH "data/gfx/fonts/staffRoll.font"
 static char *staffRollText[] =
 {
     #include "staffRollText.inc"
@@ -126,9 +126,9 @@ int staffRoll(void)
             }
         }
 
-		sleep_delay = mspf - (SDL_GetTicks()-ms);
+		/*sleep_delay = mspf - (SDL_GetTicks()-ms);
 		if(sleep_delay > 0)
-			SDL_Delay( sleep_delay );
+			SDL_Delay( sleep_delay );*/
     }
     //SDL_FreeSurface(background);
     freeBmFont(&textFont);

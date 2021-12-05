@@ -33,6 +33,7 @@
 #include <SDL/SDL.h>
 #include <SDL/SDL_mixer.h>
 //
+#include "audio.h"
 #include "d_audio.h"
 #include "l_sfx.h"
 //
