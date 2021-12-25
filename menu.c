@@ -47,6 +47,7 @@
 #include "ranking.h"
 #include "service.h"
 #include "staffRoll.h"
+#include "sleep_delay.h"
 
 #define STRBUFFER_MAX_SIZE 50
 
@@ -107,9 +108,6 @@ int menu(void)
 	bmFont menuFont;
 	loadBmFont("data/gfx/fonts/cell_phone.font" , &menuFont);
 
-	int mspf = 1000/MENU_FPS; //milisecond per frame
-	int ms = 0; //milisecond passed since SDL was initialized
-	int sleep_delay = 0;
 	int menu_status = 0;
 
 	unsigned select = 0;
@@ -131,7 +129,7 @@ int menu(void)
 
 	while(!menu_status)
 	{   
-		ms = SDL_GetTicks();
+		Start_Sleep_Delay();
 
         readController(&controller);
 
@@ -197,10 +195,8 @@ int menu(void)
         blitToGameFb( bgBuffer , NULL , NULL);
         DRAW_OPTION(select);
 		updateVideoScreen();
-/*
-		sleep_delay = mspf - (SDL_GetTicks()-ms);
-		if(sleep_delay > 0)
-			SDL_Delay( sleep_delay );*/
+
+		Sleep_Delay();
 	}
 
 	RETURN(0)

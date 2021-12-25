@@ -45,6 +45,7 @@
 #include "SDL_utils.h"
 #include "game.h"
 #include "loadData.h"
+#include "sleep_delay.h"
 
 #define DDL_LOGO_GFX_PATH "data/gfx/menu/ddl_logo1.bmp"
 
@@ -81,9 +82,6 @@ int logoFade(char *logoPath, SDL_Rect *srcrect, SDL_Rect *dstrect
 					   0, 0, 0, 0);
     SDL_SetAlpha( fadeMask , SDL_RLEACCEL | SDL_SRCALPHA , 0);
 
-	int mspf = 1000/FPS; //milisecond per frame
-	int ms = 0;
-	int sleep_delay = 0;
 	int menu_status = 0;
 
     long fadeInFrames = tfadeIn/mspf;
@@ -99,7 +97,7 @@ int logoFade(char *logoPath, SDL_Rect *srcrect, SDL_Rect *dstrect
 	while(1)
 	{
 		//Frame counter
-		ms = SDL_GetTicks();
+		Start_Sleep_Delay();
 
         blitToGameFb( bgBuffer , NULL , NULL);
 
@@ -123,9 +121,7 @@ int logoFade(char *logoPath, SDL_Rect *srcrect, SDL_Rect *dstrect
 
 		updateVideoScreen();
 
-		/*sleep_delay = mspf - (SDL_GetTicks()-ms);
-		if(sleep_delay > 0)
-			SDL_Delay( sleep_delay );*/
+		Sleep_Delay( );
     }
 
     SDL_FreeSurface(bgBuffer);

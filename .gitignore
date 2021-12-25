@@ -7,3 +7,4 @@ opk/trajectories
 opk/overheated_gcw0
 overheated-rs97/data
 overheated-rs97/*.dge
+data/score/*.score

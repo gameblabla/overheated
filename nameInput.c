@@ -47,6 +47,7 @@
 #include "loadData.h"
 #include "scoreboard.h"
 #include "starfield.h"
+#include "sleep_delay.h"
 
 #define NAME_INPUT_FPS 60
 #define STARS_NUMBER 100
@@ -150,9 +151,6 @@ int nameInputScreen(int score)
 
     //
     int i;
-	int mspf = 1000/GAME_FPS; //milisecond per frame
-	int ms = 0; //milisecond passed since SDL was initialized
-	int sleep_delay = 0;
 	int menu_status = 0;
 
     //Star field stars
@@ -168,7 +166,7 @@ int nameInputScreen(int score)
     while(READING_NAME == menu_status)
 	{
 		//Frame counter
-		ms = SDL_GetTicks();
+		Start_Sleep_Delay();
 
 		//Read controller input
 		readController(&controller);
@@ -193,9 +191,7 @@ int nameInputScreen(int score)
 
         updateVideoScreen();
         //
-		/*sleep_delay = mspf - (SDL_GetTicks()-ms);
-		if(sleep_delay > 0)
-			SDL_Delay( sleep_delay );*/
+		Sleep_Delay( );
 	}
 
     //Remove NULs ( except for the string terminator NUL!)

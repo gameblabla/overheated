@@ -47,6 +47,7 @@
 #include "loadData.h"
 #include "scoreboard.h"
 #include "starfield.h"
+#include "sleep_delay.h"
 
 
 #define RETURN(x)\
@@ -94,9 +95,6 @@ int rankingScreen(void)
 	controllerStruct controller;
 	initController(&controller);
 
-	int mspf = 1000/GAME_FPS; //milisecond per frame
-	int ms = 0; //milisecond passed since SDL was initialized
-	int sleep_delay = 0;
 	int menu_status = 0;
 
     //Star field stars
@@ -120,7 +118,7 @@ int rankingScreen(void)
 	while( menu_status != EXIT_MENU)
 	{
 		//Frame counter
-		ms = SDL_GetTicks();
+		Start_Sleep_Delay();
 
 		//Read controller input
         readController(&controller);
@@ -186,9 +184,7 @@ int rankingScreen(void)
         updateVideoScreen();
 
         //
-		/*sleep_delay = mspf - (SDL_GetTicks()-ms);
-		if(sleep_delay > 0)
-			SDL_Delay( sleep_delay );*/
+		Sleep_Delay( );
 	}   
 
     RETURN(0)

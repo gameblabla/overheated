@@ -41,6 +41,7 @@
 #include "SDL_Text.h"
 #include "loadData.h"
 #include "trackPlayer.h"
+#include "sleep_delay.h"
 
 #define STR_BUFFER_MAX_SIZE 50
 
@@ -61,9 +62,6 @@ int musicTest(SDL_Surface *screen)
 	loadBmFont("data/gfx/fonts/cell_phone.font" , &menuFont);
 
 	int zoom = DEFAULT_ZOOM;
-	int mspf = 1000/MENU_FPS; //milisecond per frame
-	int ms = 0; //milisecond passed since SDL was initialized
-	int sleep_delay = 0;
 	int menu_status = 0;
 
 	unsigned select = 0;
@@ -86,7 +84,7 @@ int musicTest(SDL_Surface *screen)
 	while(!menu_status)
 	{
 		//Frame counter
-		ms = SDL_GetTicks();
+		Start_Sleep_Delay();
 
 		//Read controller input
         readController(&controller);
@@ -137,10 +135,8 @@ int musicTest(SDL_Surface *screen)
 
 		SDL_Flip(screen);// update the screen
 		//SDL_UpdateRect(screen,0,0,0,0);
-/*
-		sleep_delay = mspf - (SDL_GetTicks()-ms);
-		if(sleep_delay > 0)
-			SDL_Delay( sleep_delay );*/
+
+		Sleep_Delay( );
 	}
 
 	RETURN(0)

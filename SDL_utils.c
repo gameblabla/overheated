@@ -152,7 +152,7 @@ int SDL_zoom( SDL_Surface *source , SDL_Surface *dest
 
 SDL_Surface *SDL_optimizeSurface(SDL_Surface *surface)
 {
-	return SDL_DisplayFormatAlpha(surface);
+	return SDL_DisplayFormat(surface);
 }
 
 //------------------------------------------------

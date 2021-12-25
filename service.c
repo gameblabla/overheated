@@ -49,6 +49,7 @@
 #include "scoreboard.h"
 #include "gameConfig.h"
 #include "trackPlayer.h"
+#include "sleep_delay.h"
 //-------------------------------------------
 
 #define STR_BUFFER_SIZE 1024
@@ -208,9 +209,6 @@ int serviceMenu(void)
 	initController(&controller);
 
     //
-	int mspf = 1000/GAME_FPS; //milisecond per frame
-	int ms = 0;
-	int sleep_delay = 0;
 	int menu_status = 0;
 
     int optSelection = 0; //Option selection
@@ -219,7 +217,7 @@ int serviceMenu(void)
     while( menu_status != EXIT_MENU)
 	{
         //Frame counter
-		ms = SDL_GetTicks();
+		Start_Sleep_Delay();
 
 
         /******************************
@@ -409,9 +407,7 @@ int serviceMenu(void)
 
 		updateVideoScreen();
 
-	/*	sleep_delay = mspf - (SDL_GetTicks()-ms);
-		if(sleep_delay > 0)
-			SDL_Delay( sleep_delay );*/
+		Sleep_Delay( );
     }
 
     RETURN(0);

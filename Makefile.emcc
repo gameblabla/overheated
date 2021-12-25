@@ -13,7 +13,7 @@ CFLAGS		= -O3 -flto -I. -Ifont
 CXXFLAGS = $(CFLAGS)
 
 LDFLAGS     = -flto
-LDFLAGS		+= -s ENVIRONMENT=web -s STB_IMAGE=1 -s ASSERTIONS=1 --closure 1  -sALLOW_MEMORY_GROWTH=0 -s TOTAL_MEMORY=1400mb -sMALLOC="emmalloc"
+LDFLAGS		+= -s ENVIRONMENT=web -s STB_IMAGE=1 -s ASSERTIONS=1 --closure 1  -sALLOW_MEMORY_GROWTH=0 -s TOTAL_MEMORY=1400mb -sMALLOC="emmalloc" -DNODELAY
 
 
 # Rules to make executable

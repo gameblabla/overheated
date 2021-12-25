@@ -48,6 +48,7 @@
 #include "SDL_utils.h"
 #include "game.h"
 #include "loadData.h"
+#include "sleep_delay.h"
 
 //#define STAFF_ROLL_BG_PATH   "data/gfx/menu/staffRoll.bmp"
 #define STAFF_ROLL_FONT_PATH "data/gfx/fonts/staffRoll.font"
@@ -76,9 +77,6 @@ int staffRoll(void)
     float lineOffset = 0.0;
     float textSpeed = 0.2;
 
-	int mspf = 1000/FPS; //milisecond per frame
-	int ms = 0;
-	int sleep_delay = 0;
 	int menu_status = 0;
 
 	SDL_Event event;
@@ -88,7 +86,7 @@ int staffRoll(void)
 	while(1)
 	{
 		//Frame counter
-		ms = SDL_GetTicks();
+		Start_Sleep_Delay();
 
         readController(&controller);
         if(controller.pressed.START)
@@ -126,9 +124,7 @@ int staffRoll(void)
             }
         }
 
-		/*sleep_delay = mspf - (SDL_GetTicks()-ms);
-		if(sleep_delay > 0)
-			SDL_Delay( sleep_delay );*/
+		Sleep_Delay( );
     }
     //SDL_FreeSurface(background);
     freeBmFont(&textFont);

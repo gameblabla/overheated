@@ -64,6 +64,7 @@
 #include "nameInput.h"
 #include "l_bgIns.h"
 #include "d_gameConfig.h"
+#include "sleep_delay.h"
 
 extern void setAdvertTime( unsigned frames);
 int game(char *startMsg , int stageNumber);
@@ -315,10 +316,6 @@ int game(char *startMsg , int stageNumber)
             gameOverFrames = REPLAY_GAMEOVER_FRAMES;
     }
 
-	int mspf = 1000/FPS; //milisecond per frame
-	long ms = 0; //milisecond passed since SDL was initialized
-	int sleep_delay = 0;
-
 	controllerStruct controller;
 	initController(&controller);
 
@@ -331,7 +328,7 @@ int game(char *startMsg , int stageNumber)
 	while(gameStatus >= 0)
 	{
 		//Frame counter
-		ms = SDL_GetTicks();
+		Start_Sleep_Delay();
 
 		//Read controller input
 		readController(&controller);
@@ -553,9 +550,7 @@ int game(char *startMsg , int stageNumber)
         updateVideoScreen();
 
         //timing delay
-		/*sleep_delay = mspf - (SDL_GetTicks()-ms);
-		if(sleep_delay > 0)
-			SDL_Delay( sleep_delay );*/
+		Sleep_Delay( );
 
 	}//End main loop
 
