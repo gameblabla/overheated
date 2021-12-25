@@ -137,7 +137,7 @@ void makeSpitze(SDL_Rect pos , int type)
 					 , ENEMIES_16X16_CHARSET , 0 , 0 , 1 , &enemyAnim);
 		newSpitze( newObjPtr , type );
 #ifdef DEBUG
-		printfGameObjectArray(stdin , "--New&Pull--\n" , &OAM_enemies);
+		//printfGameObjectArray(stdin , "--New&Pull--\n" , &OAM_enemies);
 #endif
 	}
 	return;
@@ -421,7 +421,7 @@ void spawnGaucer(SDL_Rect pos)
 					  ,ENEMIES_16X16_CHARSET , 5 , 0 , 1 , &enemyAnim);
 		newGaucer( newObjPtr);
 #ifdef DEBUG
-		printfGameObjectArray(stdin , "--New&Pull--\n" , &OAM_enemies);
+		//printfGameObjectArray(stdin , "--New&Pull--\n" , &OAM_enemies);
 #endif
 	}
 	return;
@@ -540,7 +540,7 @@ void spawnLovac(SDL_Rect pos)
 					  , ENEMIES_32X32_CHARSET , enemyAnim.base , 0 , 1 , &enemyAnim);
 		newLovac( newObjPtr);
 #ifdef DEBUG
-		printfGameObjectArray(stdin , "--New&Pull--\n" , &OAM_enemies);
+		//printfGameObjectArray(stdin , "--New&Pull--\n" , &OAM_enemies);
 #endif
 	}
 	return;
@@ -638,7 +638,7 @@ void spawnZorgen(SDL_Rect pos)
 					  , ENEMIES_16X16_CHARSET , enemyAnim.base , 0 , 1 , &enemyAnim);
 		newZorgen( newObjPtr);
 #ifdef DEBUG
-		printfGameObjectArray(stdin , "--New&Pull--\n" , &OAM_enemies);
+		//printfGameObjectArray(stdin , "--New&Pull--\n" , &OAM_enemies);
 #endif
 	}
 	return;
@@ -741,7 +741,7 @@ void spawnLitec(SDL_Rect pos)
 					  , ENEMIES_64X64_CHARSET , 10 , 0 , 1 , &enemyAnim);
 		newLitec( newObjPtr);
 #ifdef DEBUG
-		printfGameObjectArray(stdin , "--New&Pull--\n" , &OAM_enemies);
+		//printfGameObjectArray(stdin , "--New&Pull--\n" , &OAM_enemies);
 #endif
 	}
 	return;
@@ -802,7 +802,7 @@ void spawnEnemyMissile(SDL_Rect pos)
 					  , ENEMIES_16X16_CHARSET , 10 , 0 , 1 , &enemyAnim);
 		newEnemyMissile( newObjPtr);
 #ifdef DEBUG
-		printfGameObjectArray(stdin , "--New&Pull--\n" , &OAM_enemies);
+		//printfGameObjectArray(stdin , "--New&Pull--\n" , &OAM_enemies);
 #endif
 	}
 	return;
@@ -885,7 +885,7 @@ void makeFarben(SDL_Rect pos , int type )
 					  , ENEMIES_32X32_CHARSET , enemyAnim.base , 0 , 1 , &enemyAnim);
 		newFarben( newObjPtr , type );
 #ifdef DEBUG
-		printfGameObjectArray(stdin , "--New&Pull--\n" , &OAM_enemies);
+		//printfGameObjectArray(stdin , "--New&Pull--\n" , &OAM_enemies);
 #endif
 	}
 	return;
@@ -997,7 +997,7 @@ void spawnPetrus(SDL_Rect pos)
 					  , ENEMIES_16X16_CHARSET , enemyAnim.base , 0 , 1 , &enemyAnim);
 		newPetrus( newObjPtr);
 #ifdef DEBUG
-		printfGameObjectArray(stdin , "--New&Pull--\n" , &OAM_enemies);
+		//printfGameObjectArray(stdin , "--New&Pull--\n" , &OAM_enemies);
 #endif
 	}
 	return;
@@ -1085,7 +1085,7 @@ void makeJumpa(SDL_Rect pos , int type)
 	    newJumpa( newObjPtr , type);
 
 #ifdef DEBUG
-		printfGameObjectArray(stdin , "--New&Pull--\n" , &OAM_enemies);
+		//printfGameObjectArray(stdin , "--New&Pull--\n" , &OAM_enemies);
 #endif
 	}
 	return;
@@ -1198,7 +1198,7 @@ void spawnStom(SDL_Rect pos , int type)
 					  , ENEMIES_16X16_CHARSET , enemyAnim.base , 0 , 1 , &enemyAnim);
 		newStom( newObjPtr , type);
 #ifdef DEBUG
-		printfGameObjectArray(stdin , "--New&Pull--\n" , &OAM_enemies);
+		//printfGameObjectArray(stdin , "--New&Pull--\n" , &OAM_enemies);
 #endif
 	}
 	return;
@@ -1367,7 +1367,7 @@ void spawnLaroc(SDL_Rect pos)
 					  , ENEMIES_64X64_CHARSET , enemyAnim.base , 0 , 1 , &enemyAnim);
 		newLaroc( newObjPtr);
 #ifdef DEBUG
-		printfGameObjectArray(stdin , "--New&Pull--\n" , &OAM_enemies);
+		//printfGameObjectArray(stdin , "--New&Pull--\n" , &OAM_enemies);
 #endif
 	}
 }
@@ -1547,7 +1547,7 @@ void spawnAnancitesST(SDL_Rect pos)
 					  , ENEMIES_80X80_CHARSET , enemyAnim.base , 0 , 1 , &enemyAnim);
 		newAnancitesST( newObjPtr);
 #ifdef DEBUG
-		printfGameObjectArray(stdin , "--New&Pull--\n" , &OAM_enemies);
+		//printfGameObjectArray(stdin , "--New&Pull--\n" , &OAM_enemies);
 #endif
 	}
 }
@@ -1742,7 +1742,7 @@ void makeMidBossPart(SDL_Rect pos , int part)
 					  , ENEMIES_32X32_CHARSET , enemyAnim.base , 0 , 1 , &enemyAnim);
 		newMidBossPart( newObjPtr , part);
 #ifdef DEBUG
-		printfGameObjectArray(stdin , "--New&Pull--\n" , &OAM_enemies);
+		//printfGameObjectArray(stdin , "--New&Pull--\n" , &OAM_enemies);
 #endif
 	}
 }
@@ -1795,7 +1795,7 @@ void spawnMidBossEntrance(SDL_Rect pos)
 
 		newMidBossEntrance( newObjPtr);
 #ifdef DEBUG
-		printfGameObjectArray(stdin , "--New&Pull--\n" , &OAM_enemies);
+		//printfGameObjectArray(stdin , "--New&Pull--\n" , &OAM_enemies);
 #endif
 	}
 }
@@ -1930,7 +1930,7 @@ void spawnNacreeb(SDL_Rect pos)
 					  , ENEMIES_64X64_CHARSET , enemyAnim.base , 0 , 1 , &enemyAnim);
 		newLaroc( newObjPtr);
 #ifdef DEBUG
-		printfGameObjectArray(stdin , "--New&Pull--\n" , &OAM_enemies);
+		//printfGameObjectArray(stdin , "--New&Pull--\n" , &OAM_enemies);
 #endif
 	}
 }
@@ -2017,7 +2017,7 @@ void spawnGodrill(SDL_Rect pos)
 					 , ENEMIES_64X64_CHARSET , 0 , 0 , 1 , &enemyAnim);
 		newGodrill(newObjPtr);
 #ifdef DEBUG
-		printfGameObjectArray(stdin , "--New&Pull--\n" , &OAM_enemies);
+		//printfGameObjectArray(stdin , "--New&Pull--\n" , &OAM_enemies);
 #endif
 	}
 	return;
@@ -2138,7 +2138,7 @@ void spawnStarView(SDL_Rect pos)
 					 , ENEMIES_32X32_CHARSET , 0 , 0 , 1 , &enemyAnim);
 		newStarView(newObjPtr);
 #ifdef DEBUG
-		printfGameObjectArray(stdin , "--New&Pull--\n" , &OAM_enemies);
+		//printfGameObjectArray(stdin , "--New&Pull--\n" , &OAM_enemies);
 #endif
 	}
 	return;
@@ -2230,7 +2230,7 @@ void spawnLaserRing(SDL_Rect pos)
 					 , ENEMIES_128X128_CHARSET , 0 , 0 , 1 , &enemyAnim);
 		newLaserRing(newObjPtr);
 #ifdef DEBUG
-		printfGameObjectArray(stdin , "--New&Pull--\n" , &OAM_enemies);
+		//printfGameObjectArray(stdin , "--New&Pull--\n" , &OAM_enemies);
 #endif
 	}
 	return;
@@ -2335,7 +2335,7 @@ void makeTirtas(SDL_Rect pos , int type)
 					 , ENEMIES_32X32_CHARSET , 0 , 0 , 1 , &tirtasAnim[type]);
 		newTirtas( newObjPtr , type );
 #ifdef DEBUG
-		printfGameObjectArray(stdin , "--New&Pull--\n" , &OAM_enemies);
+		//printfGameObjectArray(stdin , "--New&Pull--\n" , &OAM_enemies);
 #endif
 	}
 	return;
@@ -2513,7 +2513,7 @@ void makeEnemyHMissile(SDL_Rect pos , int pitch)
 					 , ENEMIES_16X16_CHARSET , 0 , 0 , 1 , &enemyAnim);
 		newEnemyHMissile( newObjPtr , pitch);
 #ifdef DEBUG
-		printfGameObjectArray(stdin , "--New&Pull--\n" , &OAM_enemies);
+		//printfGameObjectArray(stdin , "--New&Pull--\n" , &OAM_enemies);
 #endif
 	}
 	return;
@@ -2662,7 +2662,7 @@ void spawnTekkerz(SDL_Rect pos)
 					 , ENEMIES_64X64_CHARSET , 0 , 0 , 1 , &enemyAnim);
 		newTekkerz(newObjPtr);
 #ifdef DEBUG
-		printfGameObjectArray(stdin , "--New&Pull--\n" , &OAM_enemies);
+		//printfGameObjectArray(stdin , "--New&Pull--\n" , &OAM_enemies);
 #endif
 	}
 	return;

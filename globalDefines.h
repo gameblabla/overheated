@@ -42,7 +42,13 @@
 
 #define SCREEN_W 320
 #define SCREEN_H 240
+
+#ifdef FORCE_32BPP
 #define SCREEN_BPP 32
+#else
+#define SCREEN_BPP 16
+#endif
+
 #define MAX_SC_VALUE SDL_ALPHA_OPAQUE //Max scanlines value
 #define DEFAULT_ZOOM 1
 

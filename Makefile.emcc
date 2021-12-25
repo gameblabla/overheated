@@ -8,12 +8,13 @@ SRC_C		= $(foreach dir, $(SRCDIR), $(wildcard $(dir)/*.c))
 OBJ_C		= $(notdir $(patsubst %.c, %.o, $(SRC_C)))
 OBJS		= $(OBJ_C)
 
-CFLAGS		= -O3 -flto -I. -Ifont
+CFLAGS		= -O3 -g3 -I. -Ifont
+CFLAGS		+= -DNODELAY -DFORCE_32BPP -DNOEXIT -DNO_OPT_IMG -DGCW0 -DDEBUG
 
 CXXFLAGS = $(CFLAGS)
 
 LDFLAGS     = -flto
-LDFLAGS		+= -s ENVIRONMENT=web -s STB_IMAGE=1 -s ASSERTIONS=1 --closure 1  -sALLOW_MEMORY_GROWTH=0 -s TOTAL_MEMORY=1400mb -sMALLOC="emmalloc" -DNODELAY
+LDFLAGS		+= -s ENVIRONMENT=web -s STB_IMAGE=1 -s ASSERTIONS=1 --closure 1  -sALLOW_MEMORY_GROWTH=0 -s TOTAL_MEMORY=1400mb -sMALLOC="emmalloc"
 
 
 # Rules to make executable

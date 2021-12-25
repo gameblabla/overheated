@@ -286,7 +286,6 @@ void updateVideoScreen(void)
     Disable Video
 ************************************************/
 
-/*
 void stopVideo(void)
 {
     if( gameFb != NULL)
@@ -294,14 +293,13 @@ void stopVideo(void)
 	    SDL_FreeSurface(gameFb);
         gameFb = NULL;
     }
-    if( scanlinesMask != NULL)
+    /*if( scanlinesMask != NULL)
     {
 	    SDL_FreeSurface(scanlinesMask);
         scanlinesMask = NULL;        
-    }
+    }*/
     return;
 }
-*/
 
 //-------------------------------------------
 

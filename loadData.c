@@ -119,8 +119,13 @@ int load_ChrSetArray( char *filePath , charSetArray *charSets)
 			ERROR_HANDLING
 		}
 		//Convert to the screen display format
+		#if defined(NO_OPT_IMG)
+		(charSets->array + i)->gfx = chrSetGfx;
+		#else
 		(charSets->array + i)->gfx = SDL_optimizeSurface(chrSetGfx);
 		SDL_FreeSurface(chrSetGfx);
+		#endif
+		
 		//Set transparency color
 		SDL_SetColorKey( (charSets->array + i)->gfx
 				, SDL_SRCCOLORKEY
@@ -224,9 +229,13 @@ int loadBmFont(char *filePath , bmFont *font)
 #endif
 		ERROR_HANDLING
 	}
-
+	#if defined(NO_OPT_IMG)
+	font->gfx = fontGfx;
+	#else
 	font->gfx = SDL_optimizeSurface(fontGfx);
 	SDL_FreeSurface(fontGfx);
+	#endif
+
 	//Set transparency color
 	SDL_SetColorKey( font->gfx
 			, SDL_SRCCOLORKEY

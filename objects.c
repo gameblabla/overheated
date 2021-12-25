@@ -270,7 +270,7 @@ void freeANDpushObj( GameObjectArray *objArray , GameObject *object)
 		if( objArray->nxtFree <= 0)
         {
 #ifdef DEBUG
-		    printf("[WARNING] The Free objects stack is full\n"
+		    printf("[WARNING] The Free objects stack is full\n");
 #endif
 			return;
         }
@@ -283,7 +283,7 @@ void freeANDpushObj( GameObjectArray *objArray , GameObject *object)
 		freeObject(object);
 
 #ifdef DEBUG
-		printfGameObjectArray(stdin , "--Free&Push--\n" , &objArray);
+		//printfGameObjectArray(stdin , "--Free&Push--\n" , &objArray);
 #endif
 		objArray->active--;
 		return;

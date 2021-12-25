@@ -78,6 +78,9 @@ int blitToGameFb(  SDL_Surface *src
                  );
 
 void clearGameFb(void);
+
+void stopVideo(void);
+
 #endif
 //
 #endif

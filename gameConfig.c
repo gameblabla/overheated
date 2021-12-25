@@ -85,11 +85,13 @@ int setResMode(unsigned mode)
     setGameAreaPos( 0
                    ,0);
 
-    printf("[INFO] Using resolution mode %u (%ux%u)\n"
+	#ifndef DEBUG
+    printf("[INFO] Using resolution mode %u (%ux%u,  BITDEPTH = %d)\n"
             ,mode
             ,320
-            ,240
+            ,240, SCREEN_BPP
            );
+	#endif
 
     return 0;
 }
@@ -160,7 +162,7 @@ int loadGameCfg(void)
 	char homePath[128];
 	char configPath[128];
 	snprintf(homePath, sizeof(homePath), "%s", getenv("HOME"));
-	snprintf(configPath, sizeof(configPath), "%s/.config", configPath);
+	snprintf(configPath, sizeof(configPath), "%s/.config", homePath);
 	snprintf(config_gamepath, sizeof(config_gamepath), "%s/.config/overheated", homePath);
 	snprintf(dataPath, sizeof(dataPath), "%s/data", config_gamepath);
 	snprintf(scorePath, sizeof(scorePath), "%s/data/score", config_gamepath);
@@ -175,11 +177,11 @@ int loadGameCfg(void)
 	if(access( configPath, F_OK ) == -1)  mkdir(configPath, 0755);
 #else
 	snprintf(config_gamepath, sizeof(config_gamepath), ".");
-#endif
 	snprintf(dataPath, sizeof(dataPath), "%s/data", config_gamepath);
 	snprintf(scorePath, sizeof(scorePath), "%s/data/score", config_gamepath);
 	snprintf(replayPath, sizeof(replayPath), "%s/data/replay", config_gamepath);
 	snprintf(configPath, sizeof(configPath), "%s/data/config", config_gamepath);
+#endif
 	
     if(loadGameCfgFile( GAME_CFG_FILE_PATH , &gameConfiguration))
     {

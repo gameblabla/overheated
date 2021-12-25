@@ -118,7 +118,7 @@ int SDL_zoom( SDL_Surface *source , SDL_Surface *dest
             destPixelRow += dest->w * destRect->y;
 	Uint32 *destPixel = NULL;
 	Uint32 *destPixelp = NULL; //Destination pixel pointer
-	register y,x,a,b;
+	register int y,x,a,b;
 	for( y = 0 ;
 		 y < source->h;
 		 y++ , destPixelRow += zoom*dest->w , srcPixelRow += source->w
@@ -149,11 +149,12 @@ int SDL_zoom( SDL_Surface *source , SDL_Surface *dest
 }
 
 //------------------------------------------------
-
+#if !defined(NO_OPT_IMG)
 SDL_Surface *SDL_optimizeSurface(SDL_Surface *surface)
 {
 	return SDL_DisplayFormat(surface);
 }
+#endif
 
 //------------------------------------------------
 /********************************************
@@ -169,12 +170,14 @@ SDL_Surface *loadIMG( char *path , Uint16 flags)
 		exit(1);
 	}
 
+	#if !defined(NO_OPT_IMG)
     if( flags & OPTIMIZE_IMG)
     {
         SDL_Surface *tmpSurface = imgp;
         imgp = SDL_optimizeSurface(tmpSurface);
         SDL_FreeSurface(tmpSurface);
     }
+    #endif
 
     return imgp;
 }
