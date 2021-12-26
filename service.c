@@ -73,8 +73,8 @@
 
 
 //
-#define OPT_CURSOR_GFX_PATH "data/gfx/menu/opt_cursor.bmp"
-#define MENU_BG_GFX_PATH "data/gfx/menu/service_menu_bg.bmp"
+#define OPT_CURSOR_GFX_PATH DREAMCAST_CD_PATH"data/gfx/menu/opt_cursor.bmp"
+#define MENU_BG_GFX_PATH DREAMCAST_CD_PATH"data/gfx/menu/service_menu_bg.bmp"
 
 //Menu status
 
@@ -202,7 +202,7 @@ int serviceMenu(void)
 
     //Load text font
     bmFont optionsFont;
-	loadBmFont("data/gfx/fonts/cell_phone.font" , &optionsFont);
+	loadBmFont(DREAMCAST_CD_PATH"data/gfx/fonts/cell_phone.font" , &optionsFont);
 
     //Input variables init
 	controllerStruct controller;

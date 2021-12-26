@@ -1,0 +1,6 @@
+
+charset:
+gfx:/cd/data/gfx/city_platform.bmp
+tilesW: 16
+tilesH: 16
+

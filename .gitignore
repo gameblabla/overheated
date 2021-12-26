@@ -12,3 +12,11 @@ data/score/*.score
 *.data
 *.html
 *.js
+*.exe
+*.mds
+*.mdf
+*.raw
+*.wav
+*.iso
+*.cdi
+cd/*.bin

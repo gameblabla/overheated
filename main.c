@@ -85,8 +85,14 @@ static void printHelp(char **argv)
 
 static int mainloop(void)
 {
-        intro();
-		menu();
+	#ifdef DEBUG
+	printf("[DEBUG] INTRO\n");
+	#endif
+	intro();
+	#ifdef DEBUG
+	printf("[DEBUG] MENU\n");
+	#endif
+	menu();
 }
 
 int main(int argc , char **argv)
@@ -134,15 +140,22 @@ int main(int argc , char **argv)
 	}
 #endif
 
+	#ifndef DREAMCAST
     //Check SDL version
     check_SDL_Version();
+    
     //Check SDL_Mixer version
     check_mixer_version();
+    #endif
 
 	// initialize SDL subsystems
+	#ifdef DREAMCAST
+    unsigned SDL_init_flags =  SDL_INIT_VIDEO;
+	#else
     unsigned SDL_init_flags =  SDL_INIT_VIDEO 
                              | SDL_INIT_AUDIO
                              | SDL_INIT_JOYSTICK;
+	#endif
 
 	if ( SDL_Init( SDL_init_flags ) < 0 )
 	{
@@ -152,14 +165,17 @@ int main(int argc , char **argv)
 
 	//Disable cursor
 	SDL_ShowCursor(0);
+	#ifndef DREAMCAST
 	//Open joystick 0
 	SDL_JoystickOpen(0);
-	//Clean up before exit
-	atexit(SDL_Quit);
+	#endif
 	//Open audio device
 	openAudio();
+	//Clean up before exit
+	#ifndef DREAMCAST
+	atexit(SDL_Quit);
 	atexit(closeAudio);
-
+	#endif
 
     //Load game configuration
     loadGameCfg();

@@ -1,0 +1,40 @@
+CC	= kos-cc
+
+CFLAGS = -D_SDL -DDREAMCAST -DGCW0 -DNOEXIT -DDEBUG -Ofast -flto -Isrc -std=gnu99  -DGCW0 -I.
+#LDFLAGS = -lSDL -ltremor -lm -lz
+
+#Including OPUS Libraries
+LDFLAGS = -lc -lm -lSDL -lz -s -flto
+
+DEFINES = -Wall
+OUTPUT = hcl.elf
+
+SRCDIR		= .
+VPATH		= $(SRCDIR)
+SRC_C		= $(foreach dir, $(SRCDIR), $(wildcard $(dir)/*.c))
+OBJ_C		= $(notdir $(patsubst %.c, %.o, $(SRC_C)))
+OBJS		= $(OBJ_C)
+
+all: ${OUTPUT}
+
+${OUTPUT}: ${OBJS}
+	${CC} -o ${OUTPUT} ${OBJS} ${CFLAGS} ${LDFLAGS} ${DEFINES} 
+
+pack:
+	rm -f IP.BIN
+	sh-elf-objcopy -R .stack -O binary hcl.elf main.bin
+	${KOS_BASE}/utils/scramble/scramble main.bin ./cd/1ST_READ.BIN
+	makeip ip.txt IP.BIN
+	mkisofs -C 0,$(shell lbacalc track1.raw track2.raw track3.raw) -V OVERHEATED -G IP.BIN -joliet -rock -l -o "overheated.iso" ./cd
+	mds4dc -c disc.mds overheated.iso track1.raw track2.raw track3.raw
+	
+pack_emu:
+	rm -f IP.BIN
+	sh-elf-objcopy -R .stack -O binary hcl.elf main.bin
+	${KOS_BASE}/utils/scramble/scramble main.bin ./cd/1ST_READ.BIN
+	makeip ip.txt IP.BIN
+	mkisofs -V overheated -G IP.BIN -joliet -rock -l -x cd -o "overheated.iso" ./cd
+	cdi4dc overheated.iso overheated.cdi -d
+	
+clean:
+	rm *.o *.img src/*.o src/sdl/*.o src/dc/*.o src/enemies/*.o ${OUTPUT} *.BIN *.iso *.mds *.mdf

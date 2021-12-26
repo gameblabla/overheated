@@ -47,7 +47,7 @@
 #include "loadData.h"
 #include "sleep_delay.h"
 
-#define DDL_LOGO_GFX_PATH "data/gfx/menu/ddl_logo1.bmp"
+#define DDL_LOGO_GFX_PATH DREAMCAST_CD_PATH"data/gfx/menu/ddl_logo1.bmp"
 
 /********************************************
 intro
@@ -68,6 +68,7 @@ int logoFade(char *logoPath, SDL_Rect *srcrect, SDL_Rect *dstrect
              , long unsigned tStill 
              , long unsigned tfadeOut)
 {
+	int loop_exit = 1;
 	SDL_Surface *gameScreen = getGameFb();
 
     SDL_Surface *logo = loadIMG( logoPath , OPTIMIZE_IMG);
@@ -93,8 +94,8 @@ int logoFade(char *logoPath, SDL_Rect *srcrect, SDL_Rect *dstrect
     double  fadeOutValue = SDL_ALPHA_TRANSPARENT;
     
     long stillFrames =  tStill/mspf;
-
-	while(1)
+    
+	while(loop_exit)
 	{
 		//Frame counter
 		Start_Sleep_Delay();
@@ -117,7 +118,9 @@ int logoFade(char *logoPath, SDL_Rect *srcrect, SDL_Rect *dstrect
             fadeOutValue += fadeOutStep;
         }
         else
-            break;
+        {
+			loop_exit = 0;
+		}
 
 		updateVideoScreen();
 

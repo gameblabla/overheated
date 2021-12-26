@@ -65,13 +65,16 @@
 #include "l_bgIns.h"
 #include "d_gameConfig.h"
 #include "sleep_delay.h"
+#ifdef DREAMCAST
+#include "vmu.h"
+#endif
 
 extern void setAdvertTime( unsigned frames);
 int game(char *startMsg , int stageNumber);
 extern void manageObjectsCollisions( GameObject *objects1 , int obj1Num ,GameObject *objects2 , int obj2Num);
 
 //
-#define DEBUG
+
 #define FADE_STEP 5
 
 /*******************************************/
@@ -171,6 +174,10 @@ int startGame(int type)
 		snprintf(filePath, sizeof(filePath), "%s", config_gamepath);
 		snprintf(filePath2, sizeof(filePath2), "%s/%s", filePath, modeReplayFiles[gameType]);
 		
+#ifdef DREAMCAST
+		DC_LoadVMU(modeReplayFiles[gameType], filePath2);
+#endif
+		
         if(loadGameReplay(filePath2) != 0)
         {
             return -1;
@@ -219,6 +226,9 @@ int startGame(int type)
 #ifdef DEBUG
             printf("[DEBUG] Game replay saved\n");
 #endif
+#ifdef DREAMCAST
+            DC_SaveVMU(modeReplayFiles[gameType], modeReplayFiles[gameType], "REPLAY FILE");
+#endif
             }
 		}
     }
@@ -236,6 +246,9 @@ int startGame(int type)
         && gameType != FIVE_MINUTES_REPLAY
         && rankScore(getScore(),whichScoreBoard(gameType)) > 0)
     {
+#ifdef DEBUG
+		printf("[DEBUG] nameInputScreen, gameScore.score %d\n", getScore());
+#endif
         nameInputScreen(getScore());
     }
 

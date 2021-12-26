@@ -41,7 +41,7 @@
 /*********************************************/
 
 #define TERMINAL_ERROR_MESSAGES
-#define DEBUG
+
 
 #define SYSTEM_VARS_NUMBER 0 //See str_utils.h
 #define STR_BUFFER_MAXSIZE 100 //See str_utils.h
@@ -495,7 +495,9 @@ void setTrackPlayerVolume(int volume)
         volume = MIX_MAX_VOLUME;
 
     trackPlayerVolume = volume;
+    #ifndef DREAMCAST
     Mix_VolumeMusic(volume);
+    #endif
 }
 
 /********************************************

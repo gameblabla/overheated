@@ -49,7 +49,7 @@
 
 #define SYSTEM_VARS_NUMBER 0   //  See str_utils.h
 #define STR_BUFFER_MAXSIZE 100 //  See str_utils.h
-#define DEBUG
+
 
 /*******************************************
     bgIsInteractive

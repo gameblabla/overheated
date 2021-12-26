@@ -1,0 +1,30 @@
+#background script
+
+charset:/cd/data/gfx/cityChrSet.txt
+interactive: 0
+size:
+	w:40:h:34	#size in tiles
+
+tilemap:/cd/data/stages/city/city.tilemap
+
+scroll:
+	increment:2	#scroll increment rate
+	delay:1		#number of frames delay between increments
+
+script:
+	instructions:1
+	time:00:00:00
+		set_speed:8:0
+	instructions:1
+	time:00:03:00
+		set_speed:6:0
+	instructions:1
+	time:00:03:40
+		set_speed:4:0
+	time:00:03:80
+		set_speed:2:0
+	instructions:1
+	time:00:04:00
+		set_speed:2:1
+
+

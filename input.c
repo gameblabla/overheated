@@ -34,6 +34,10 @@
 #include "d_input.h"
 #include "loadData.h"
 #include "input.h"
+#include "globalDefines.h"
+#ifdef DREAMCAST
+#include <kos.h>
+#endif
 
 //
 #define ERROR_HANDLING exit(-1);
@@ -56,7 +60,7 @@ static int replaying;
 
 int initInputSystem(void)
 {
-    loadInputConf("data/config/controls.cfg" , &controlsMap );
+    loadInputConf(DREAMCAST_CD_PATH"data/config/controls.cfg" , &controlsMap );
     return 0;
 }
 
@@ -101,6 +105,44 @@ void initController( controllerStruct *controller)
 
 int readJoypad(joypadStruct *controller)
 {
+#ifdef DREAMCAST
+    int ret=0;
+    maple_device_t *cont;
+	cont_state_t *state;		
+    cont = maple_enum_type(0, MAPLE_FUNC_CONTROLLER);
+    
+    controller->UP = 0;
+    controller->DOWN = 0;
+    controller->LEFT = 0;
+    controller->RIGHT = 0;
+    controller->START = 0;
+	controller->A = 0;
+	controller->B = 0;
+	controller->SELECT = 0;
+	
+	if(cont)
+	{
+		state = (cont_state_t *)maple_dev_status(cont);
+		if (!state)
+			ret = 0;
+		if (state->buttons & CONT_START)
+            controller->START = 1;              
+		if (state->buttons & CONT_X)
+			controller->SELECT = 1;
+		if (state->buttons & CONT_A) 
+            controller->A = 1;
+		if (state->buttons & CONT_B) 
+            controller->B = 1;
+		if (state->buttons & CONT_DPAD_UP) 
+            controller->UP = 1;
+		if (state->buttons & CONT_DPAD_DOWN) 
+            controller->DOWN = 1;
+		if (state->buttons & CONT_DPAD_LEFT) 
+            controller->LEFT = 1;
+		if (state->buttons & CONT_DPAD_RIGHT) 
+            controller->RIGHT = 1;   
+	}
+#else
 	static SDL_Event event;
 
 	if(SDL_PollEvent(&event))
@@ -269,6 +311,7 @@ int readJoypad(joypadStruct *controller)
 #endif
 
 		}while (SDL_PollEvent(&event));
+#endif
 	return 0;
 }
 

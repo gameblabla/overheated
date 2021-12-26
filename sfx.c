@@ -44,9 +44,9 @@
 #define CHECK_SAMPLE_NUM
 
 //-------------------------------------------
-
+#ifndef DREAMCAST
 Mix_ChunkArray AudioSfx; //Sound effects samples
-
+#endif
 //-------------------------------------------
 
 /********************************************
@@ -56,7 +56,11 @@ Mix_ChunkArray AudioSfx; //Sound effects samples
 
 int loadAudioSfx(char *filePath)
 {
+#ifndef DREAMCAST
 	return loadChunkArray(filePath , &AudioSfx);
+#else
+	return 0;
+#endif
 }
 
 //-------------------------------------------
@@ -68,7 +72,10 @@ int loadAudioSfx(char *filePath)
 
 void freeAudioSfx(void)
 {
+#ifndef DREAMCAST
 	freeChunkArray(&AudioSfx);
+#else
+#endif
 	return;
 }
 
@@ -81,6 +88,7 @@ void freeAudioSfx(void)
 
 void playEffect(int num)
 {
+#ifndef DREAMCAST
 	static int channelNum = 0;
 
 #ifdef CHECK_SAMPLE_NUM
@@ -93,7 +101,7 @@ void playEffect(int num)
 	channelNum++;
 	if( channelNum >=  MIXER_SFX_CHANELS )
 	channelNum = 0;
-
+#endif
 	return;
 }
 
@@ -107,9 +115,10 @@ void playEffect(int num)
 
 void playAnnouncement(int num)
 {
+#ifndef DREAMCAST
 	Mix_HaltChannel( MIXER_ANNOUNCER_CHANEL );
 	Mix_PlayChannel( MIXER_ANNOUNCER_CHANEL , *(AudioSfx.sample+num) , 0);
-
+#endif
 	return;
 }
 

@@ -61,7 +61,7 @@ extern void freeObject( GameObject *object);;
 
 #define ERROR_HANDLING 
 
-//#define DEBUG
+//
 //---------------------------------------------------------------------//
 //---------------------------------------------------------------------//
 int load_ChrSetArray( char *filePath , charSetArray *charSets)
@@ -1257,7 +1257,7 @@ int loadGameCfgFile(char *filePath , gameCfgStruct *gameConfiguration)
 		ERROR_HANDLING
 	}
 
-    printf("[INFO] Loading game configuration file \"%s\"\n" , filePath);
+	printf("[INFO] Loading game configuration file \"%s\"\n" , filePath);
 
 	systemVar_t *systemVars = NULL;
 	char finStrBuffer[STR_BUFFER_MAXSIZE]; //File string input buffer

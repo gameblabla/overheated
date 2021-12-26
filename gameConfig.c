@@ -45,7 +45,7 @@ char replayPath[128];
 char configPath[128];
 
 //-------------------------------------------
-#define GAME_CFG_FILE_PATH "data/config/game.cfg"
+#define GAME_CFG_FILE_PATH DREAMCAST_CD_PATH"data/config/game.cfg"
 //-------------------------------------------
 
 gameCfgStruct gameConfiguration;
@@ -175,6 +175,14 @@ int loadGameCfg(void)
 	if(access( scorePath, F_OK ) == -1)  mkdir(scorePath, 0755);
 	if(access( replayPath, F_OK ) == -1)  mkdir(replayPath, 0755);
 	if(access( configPath, F_OK ) == -1)  mkdir(configPath, 0755);
+#elif defined(DREAMCAST)
+	snprintf(config_gamepath, sizeof(config_gamepath), "/ram");
+	snprintf(dataPath, sizeof(dataPath), "/cd/data", config_gamepath);
+	snprintf(scorePath, sizeof(scorePath), "/ram", config_gamepath);
+	snprintf(replayPath, sizeof(replayPath), "/cd/data/replay", config_gamepath);
+	snprintf(configPath, sizeof(configPath), "/ram");
+	mkdir("/ram/data", 0755);
+	mkdir("/ram/data/score", 0755);
 #else
 	snprintf(config_gamepath, sizeof(config_gamepath), ".");
 	snprintf(dataPath, sizeof(dataPath), "%s/data", config_gamepath);

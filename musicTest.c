@@ -59,7 +59,7 @@ int musicTest(SDL_Surface *screen)
 							0, 0, 0, 0);
 
 	bmFont menuFont;
-	loadBmFont("data/gfx/fonts/cell_phone.font" , &menuFont);
+	loadBmFont(DREAMCAST_CD_PATH"data/gfx/fonts/cell_phone.font" , &menuFont);
 
 	int zoom = DEFAULT_ZOOM;
 	int menu_status = 0;
@@ -71,7 +71,7 @@ int musicTest(SDL_Surface *screen)
 	controllerStruct controller;
 	initController(&controller);
 
-    track_t *testTrack = loadTrack("data/bgm/testTrack.track");
+    track_t *testTrack = loadTrack(DREAMCAST_CD_PATH"data/bgm/testTrack.track");
     printfTrackInfo(testTrack);
     //testTrack->s_loopCounter = 0;
     playTrack(testTrack);

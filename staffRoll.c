@@ -51,7 +51,7 @@
 #include "sleep_delay.h"
 
 //#define STAFF_ROLL_BG_PATH   "data/gfx/menu/staffRoll.bmp"
-#define STAFF_ROLL_FONT_PATH "data/gfx/fonts/staffRoll.font"
+#define STAFF_ROLL_FONT_PATH DREAMCAST_CD_PATH"data/gfx/fonts/staffRoll.font"
 static char *staffRollText[] =
 {
     #include "staffRollText.inc"

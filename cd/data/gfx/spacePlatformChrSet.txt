@@ -1,0 +1,6 @@
+
+charset:
+gfx:/cd/data/gfx/spacePlatform.bmp
+tilesW: 16
+tilesH: 16
+

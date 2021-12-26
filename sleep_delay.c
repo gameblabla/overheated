@@ -35,8 +35,9 @@ void Sleep_Delay()
 	}
 	#endif
 	
-	#ifndef NODELAY
+	
 	sleep_delay = mspf - (SDL_GetTicks()-ms);
+	#ifndef NODELAY
 	if(sleep_delay > 0)
 	{
 		SDL_Delay( sleep_delay );

@@ -1,0 +1,9 @@
+
+trackFmtVer:01.0
+
+header:
+        trackLoops:-1
+
+#Sections data
+
+section:file:data/bgm/2min.ogg:loops:-1

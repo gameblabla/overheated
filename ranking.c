@@ -97,6 +97,8 @@ int rankingScreen(void)
 
 	int menu_status = 0;
 
+	/* For some reasons this crashes the console */
+	#ifndef DREAMCAST
     //Star field stars
     star stars[STARS_NUMBER];
 	initStars( stars , STARS_NUMBER);
@@ -106,6 +108,7 @@ int rankingScreen(void)
                                                  ,SCREEN_BPP , 0 , 0 , 0 , 0);
     //Fill with white pixels
     SDL_FillRect(starsGfx , NULL , SDL_MapRGB( starsGfx->format , 0xFF , 0xFF , 0xFF ));
+    #endif
 
     //Print the contents of the score board on a string
     int boardNumber = SCOREBOARD_2MIN;
@@ -132,8 +135,10 @@ int rankingScreen(void)
         //Clean screen
         SDL_FillRect(gameFb, 0, SDL_MapRGB(gameFb->format, 0, 0, 0));
 
+		#ifndef DREAMCAST
         //Draw starfield
 		updateStarfield(starsGfx , gameFb , stars , STARS_NUMBER);
+		#endif
 
         //Menu state processing
         /*Chart Expansion*/

@@ -1,0 +1,14 @@
+#background script
+
+charset:/cd/data/gfx/spaceChrSet.txt
+interactive: 0
+
+size:
+	w:20:h:20	#size in tiles
+
+tilemap:/cd/data/stages/space/spaceBG.tilemap
+
+scroll:
+	increment:1	#scroll increment rate
+	delay:0	z	#number of frames delay between increments
+

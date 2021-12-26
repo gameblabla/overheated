@@ -25,14 +25,15 @@
 //
 #include <stdio.h>
 #include "l_stages.h"
+#include "globalDefines.h"
 //
 #define STAGES_NUMBER 2
 //
 
 static char *stages[STAGES_NUMBER] =
 {
-     "data/stages/city/city.stage"
-    ,"data/stages/space/space.stage"
+     DREAMCAST_CD_PATH"data/stages/city/city.stage"
+    ,DREAMCAST_CD_PATH"data/stages/space/space.stage"
 };
 
 /*******************************************

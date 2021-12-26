@@ -25,6 +25,12 @@
 #ifndef GLOBAL_DEFINES_H
 #define GLOBAL_DEFINES_H
 
+#ifdef DREAMCAST
+#define DREAMCAST_CD_PATH "/cd/"
+#else
+#define DREAMCAST_CD_PATH ""
+#endif
+
 #define PERRORS //Print errors
 
 #define GM_SCREEN_W 320
@@ -104,7 +110,7 @@
 
 //GAME RESOURCES
 
-#define SMALL_FONT  "data/gfx/fonts/cell_phone.font"
-#define ADVERT_FONT "data/gfx/fonts/announcements.font"
+#define SMALL_FONT  DREAMCAST_CD_PATH"data/gfx/fonts/cell_phone.font"
+#define ADVERT_FONT DREAMCAST_CD_PATH"data/gfx/fonts/announcements.font"
 
 #endif

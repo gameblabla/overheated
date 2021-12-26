@@ -35,6 +35,9 @@
 #include "d_gameConfig.h"
 #include "str_utils.h"
 #include "scoreboard.h"
+#ifdef DREAMCAST
+#include "vmu.h"
+#endif
 //
 #define TERMINAL_ERROR_MESSAGES
 #define TERMINAL_STATUS_MESSAGES
@@ -44,14 +47,19 @@
 
 #define ERROR_HANDLING exit(-1);
 
-#define DEBUG
+
 
 scoreboard gameScoreBoards[SCOREBOARDS_NUMBER];
 
 char *scoreBoardsPath[SCOREBOARDS_NUMBER] =
 {
+#ifdef DREAMCAST
+     "2.scr",
+     "5.scr"
+#else
      "data/score/twoMinMode.score",
      "data/score/fiveMinMode.score"
+#endif
 };
 
 /********************************************
@@ -175,6 +183,10 @@ int loadScoreboards(void)
         //Create a default scoreboard
         initScoreboard( gameScoreBoards + boardNumber);
 
+#ifdef DREAMCAST
+		DC_LoadVMU(scoreBoardsPath[boardNumber], filePath);
+#endif
+
         //Open score file
         if( ( inFp = fopen( filePath , "rb")) == NULL)
         {
@@ -272,9 +284,15 @@ int saveScoreboard( int boardNumber)
 #endif
             return -1;
     }
-
+    
     saveScoreData( outFp , board);
     fclose(outFp);
+    
+#ifdef DREAMCAST
+	printf("VMU save score\n");
+	DC_SaveVMU(scoreBoardsPath[boardNumber], scoreBoardsPath[boardNumber], "SCOREBOARD");
+#endif
+
     
     return 0;
 }

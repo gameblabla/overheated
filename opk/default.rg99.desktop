@@ -1,0 +1,10 @@
+[Desktop Entry]
+Type=Application
+Name=Overheated
+Comment=Shoot'em up game
+Exec=overheated_rg99
+Icon=icon
+Terminal=false
+Categories=games;
+X-OD-NeedsDownscaling=false
+X-OD-NeedsJoystick=false

@@ -54,7 +54,7 @@
 //
 #include "debug.h"
 
-//#define DEBUG
+//
 
 static unsigned int playerLives = 0;
 static int playerSpeedLevel = 1;

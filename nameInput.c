@@ -124,8 +124,16 @@ int playerNameInput( unsigned char *name , unsigned *nameChr , joypadStruct *con
 
 int nameInputScreen(int score)
 {
+#ifdef DEBUG
+		printf("[DEBUG] getVideoScreen sc\n");
+#endif
     SDL_Surface *screen = getVideoScreen();
     SDL_Surface *gameFb = getGameFb();
+    
+#ifdef DEBUG
+		printf("[DEBUG] loadBmFont sc\n");
+#endif
+    
     //
     bmFont msgFont;
     loadBmFont( ADVERT_FONT , &msgFont);
@@ -134,6 +142,10 @@ int nameInputScreen(int score)
 	loadBmFont( SMALL_FONT , &inputFont);
     //
     int rank = rankScore( score , whichScoreBoard(gameType));
+
+#ifdef DEBUG
+		printf("[DEBUG] rankScore sc\n");
+#endif
 
     char rankText[STR_BUFFER_SIZE];
     sprintf( rankText , "  YOUR RANK IS %2dTH\n\n\n%s"
@@ -147,12 +159,17 @@ int nameInputScreen(int score)
     unsigned  nameChr = 0;
     
     controllerStruct controller;
+    
+#ifdef DEBUG
+		printf("[DEBUG] initController sc\n");
+#endif
 	initController(&controller);
 
     //
     int i;
 	int menu_status = 0;
 
+#ifndef DREAMCAST
     //Star field stars
     star stars[STARS_NUMBER];
 	initStars( stars , STARS_NUMBER);
@@ -162,6 +179,11 @@ int nameInputScreen(int score)
                                                  ,SCREEN_BPP , 0 , 0 , 0 , 0);
     //Fill with white pixels
     SDL_FillRect(starsGfx , NULL , SDL_MapRGB( starsGfx->format , 0xFF , 0xFF , 0xFF ));
+#endif
+
+#ifdef DEBUG
+		printf("[DEBUG] SDL_FillRect sc\n");
+#endif
 
     while(READING_NAME == menu_status)
 	{
@@ -178,9 +200,11 @@ int nameInputScreen(int score)
         //Clean screen
         SDL_FillRect( gameFb , 0, SDL_MapRGB( gameFb->format, 0, 0, 0));
 
+		// Crashes Dreamcast. Why ? No idea
+#ifndef DREAMCAST
         //Draw starfield
 		updateStarfield(starsGfx , gameFb , stars , STARS_NUMBER);
-
+#endif
         //Print Text
         SDL_Text( rankText    , &msgFont   , 80 , 20 , gameFb);
         SDL_Text( inputPrompt , &inputFont , 80 , 150 , gameFb);

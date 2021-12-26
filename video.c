@@ -38,6 +38,9 @@
 #include "d_GameObject.h"
 #include "d_video.h"
 #include "SDL_utils.h"
+#ifdef DREAMCAST
+#include <SDL/SDL_dreamcast.h>
+#endif
 
 //
 #define VIDEO_ERR_MSG_SIZE 1024
@@ -187,6 +190,10 @@ void setGameAreaPos(int x , int y)
 
 int initVideo(void)
 {
+#ifdef DREAMCAST
+	SDL_DC_SetVideoDriver(SDL_DC_DMA_VIDEO);
+#endif
+	
 	Uint32 SDL_SetVideoMode_flags = SDL_HWSURFACE | SDL_DOUBLEBUF | SDL_FULLSCREEN ;
 
     if(0 == videoConf.fullscreen)
@@ -211,13 +218,14 @@ int initVideo(void)
         return -1;
 	}
 
-    /*Create game frame buffer*/
-    gameFb = SDL_CreateRGBSurface( SDL_SWSURFACE
+    /*Create game frame buffer (Gameblabla : No need fo that, just point to screen buffer directly) */
+    gameFb = screen;
+    /*gameFb = SDL_CreateRGBSurface( SDL_SWSURFACE
                                   , GM_SCREEN_W
                                   , GM_SCREEN_H
                                   , SCREEN_BPP
 					              , 0, 0, 0, 0
-                                 );
+                                 );*/
     /*Create scanlines mask*/
     /*if(videoConf.scanlines )
     {
@@ -252,15 +260,15 @@ int blitToGameFb(  SDL_Surface *src
 void updateVideoScreen(void)
 {
 	    //int zoom = videoConf.scaleFactor;
-        SDL_Rect gamePos =
+        /*SDL_Rect gamePos =
         {
              videoConf.gameAreaX
             ,videoConf.gameAreaY
             ,0,0
         };
 
-        /**/
-        SDL_BlitSurface( gameFb , NULL , screen , &gamePos );
+        SDL_BlitSurface( gameFb , NULL , screen , &gamePos );*/
+        
 		/*if(zoom)
         {
 			SDL_zoom( gameFb , screen , &gamePos , zoom);
@@ -288,10 +296,10 @@ void updateVideoScreen(void)
 
 void stopVideo(void)
 {
-    if( gameFb != NULL)
+    if( screen != NULL)
     {
-	    SDL_FreeSurface(gameFb);
-        gameFb = NULL;
+	    SDL_FreeSurface(screen);
+        screen = NULL;
     }
     /*if( scanlinesMask != NULL)
     {

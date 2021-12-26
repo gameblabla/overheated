@@ -35,6 +35,10 @@
 #include "d_audio.h"
 #include "audio.h"
 
+#ifdef DREAMCAST
+#include <kos.h>
+#endif
+
 //-------------------------------------------
 
 
@@ -43,7 +47,7 @@
 
 #define ERROR_HANDLING exit(-1);
 
-#define DEBUG
+
 
 int sfxVolume = MIX_MAX_VOLUME; //Sound effects volume
 
@@ -76,22 +80,25 @@ int check_mixer_version(void)
 
 int openAudio(void)
 {
+#ifndef DREAMCAST
 	//SDL_Mixer open audio device
 	if( Mix_OpenAudio( AUDIO_FREQ ,  AUDIO_FMT  , 2 , AUDIO_CHUNKSIZE) < 0)
 	{
 		fprintf(stderr,"[ERROR] Mix_OpenAudio: %s\n", Mix_GetError());
 		ERROR_HANDLING
 	}
+
 	//Load support for ogg
 	if (MIX_INIT_OGG & Mix_Init(MIX_INIT_OGG) == 0)
 	{
 		fprintf(stderr,"[ERROR] SDL_mixer can't load ogg support\n");
 		ERROR_HANDLING
 	}
+	
 	//Set channels volume
 	Mix_AllocateChannels(MIXER_CHANNELS_NUMBER);
 	Mix_Volume(-1, sfxVolume);
-
+#endif
 	return 0;
 }
 
@@ -105,6 +112,7 @@ int openAudio(void)
 
 void closeAudio(void)
 {
+#ifndef DREAMCAST
 	//Unload support modules
 	while(Mix_Init(0)) 
 		Mix_Quit();
@@ -112,7 +120,7 @@ void closeAudio(void)
 	//Close Audio device
 	while ( Mix_QuerySpec(NULL , NULL , NULL))
 		Mix_CloseAudio();
-
+#endif
 	return ;
 }
 
@@ -125,6 +133,7 @@ void closeAudio(void)
 
 int loadChunkArray(char *fileName , Mix_ChunkArray *array)
 {
+#ifndef DREAMCAST
 	systemVar_t *systemVars = NULL;
 
 	FILE *inFp;
@@ -176,6 +185,7 @@ int loadChunkArray(char *fileName , Mix_ChunkArray *array)
 #endif
 
 	fclose(inFp);
+#endif
 	return 0;
 }
 
@@ -183,6 +193,7 @@ int loadChunkArray(char *fileName , Mix_ChunkArray *array)
 
 void freeChunkArray(Mix_ChunkArray *array)
 {
+#ifndef DREAMCAST
 	if( array->sample == NULL
 	   || array->size <= 0)
 	{
@@ -194,6 +205,7 @@ void freeChunkArray(Mix_ChunkArray *array)
 		Mix_FreeChunk(*(array->sample+i));
 
 	free( array->sample);
+#endif
 	return;
 }
 
@@ -212,7 +224,9 @@ void setSFX_Volume( int volume)
         volume = MIX_MAX_VOLUME;
 
     sfxVolume = volume;
+    #ifndef DREAMCAST
 	Mix_Volume(-1, sfxVolume);
+	#endif
 }
 
 //-------------------------------------------
@@ -227,7 +241,9 @@ void incSFX_Volume(void)
     if( sfxVolume < MIX_MAX_VOLUME)
         sfxVolume++;
 
+#ifndef DREAMCAST
 	Mix_Volume(-1, sfxVolume);
+#endif
 }
 
 //-------------------------------------------
@@ -242,7 +258,9 @@ void decSFX_Volume(void)
     if( sfxVolume > 0)
         sfxVolume--;
 
+#ifndef DREAMCAST
 	Mix_Volume(-1, sfxVolume);
+#endif
 }
 
 //-------------------------------------------

@@ -1,0 +1,81 @@
+
+charset:
+gfx:/cd/data/gfx/16x16enemies.bmp
+tilesW: 16
+tilesH: 16
+
+charset:
+gfx:/cd/data/gfx/ship.bmp
+tilesW: 34
+tilesH: 32
+
+charset:
+gfx:/cd/data/gfx/bullet1.bmp
+tilesW: 16
+tilesH: 16
+
+charset:
+gfx:/cd/data/gfx/16x16effects.bmp
+tilesW: 16
+tilesH: 16
+
+charset:
+gfx:/cd/data/gfx/8x8bullets.bmp
+tilesW: 8
+tilesH: 8
+
+charset:
+gfx:/cd/data/gfx/16x16bonus.bmp
+tilesW: 16
+tilesH: 16
+
+charset:
+gfx:/cd/data/gfx/64x64enemies.bmp
+tilesW: 64
+tilesH: 64
+
+charset:
+gfx:/cd/data/gfx/32x32enemies.bmp
+tilesW: 32
+tilesH: 32
+
+charset:
+gfx:/cd/data/gfx/128x128enemies.bmp
+tilesW:128
+tilesH:128
+
+#charset 10
+charset:
+gfx:/cd/data/gfx/16x16bullets.bmp
+tilesW:16
+tilesH:16
+
+charset:
+gfx:/cd/data/gfx/32x32_effects.bmp
+tilesW:32
+tilesH:32
+
+charset:
+gfx:/cd/data/gfx/8x8effects.bmp
+tilesW:8
+tilesH:8
+
+charset:
+gfx:/cd/data/gfx/80x80enemies.bmp
+tilesW:80
+tilesH:80
+
+charset:
+gfx:/cd/data/gfx/64x64_effects.bmp
+tilesW:64
+tilesH:64
+
+charset:
+gfx:/cd/data/gfx/empty_tileset.bmp
+tilesW:16
+tilesH:16
+
+
+
+
+

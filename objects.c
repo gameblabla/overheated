@@ -49,7 +49,7 @@
 #include "bonus.h"
 #include "bullets.h"
 
-//#define DEBUG
+//
 //#define DRAW_COLBOX_OVER
 //#define DRAW_POWERLESS_COLBOX 0
 

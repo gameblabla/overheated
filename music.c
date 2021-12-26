@@ -33,6 +33,12 @@
 //#include <SDL/SDL.h>
 //#include <SDL/SDL_mixer.h>
 //
+#ifdef DREAMCAST
+#include <kos.h>
+#include <libadx/libadx.h> /* ADX Decoder Library */
+#include <libadx/snddrv.h> /* Direct Access to Sound Driver */
+#endif
+
 #include "music.h"
 #include "l_music.h"
 #include "trackPlayer.h"
@@ -72,6 +78,25 @@ void incMusicVolume(int amount)
 *********************************************/
 int playMusicTrack(int trackNumber)
 {
+	//0 Menu, 1 2min, 2 5min
+#ifdef DREAMCAST
+	//adx_stop();
+	switch(trackNumber)
+	{
+		case 0:
+			cdrom_cdda_play(1, 2, 15, CDDA_TRACKS);
+			//adx_dec( "/cd/intro.adx", 1 );
+		break;
+		case 1:
+			cdrom_cdda_play(2, 3, 15, CDDA_TRACKS);
+			//adx_dec( "/cd/2min.adx", 1 );
+		break;
+		case 2:
+			cdrom_cdda_play(3, 4, 15, CDDA_TRACKS);
+			//adx_dec( "/cd/5min.adx", 1 );
+		break;
+	}
+#else
     char *filePath = getTrackFilePath(trackNumber);
     if( filePath == NULL)
         return 1;
@@ -79,6 +104,7 @@ int playMusicTrack(int trackNumber)
     freeMusic();
     track_t *track = loadTrack(filePath);
     playTrack(track);
+#endif
 
     return 0;
 }
@@ -89,7 +115,13 @@ int playMusicTrack(int trackNumber)
 *********************************************/
 void freeMusic(void)
 {
+#ifdef DREAMCAST
+    /* Spin down the CD */
+	//cdrom_cdda_pause();
+	//adx_stop();
+#else
     track_t *track = ejectTrack();
     if(track != NULL)
         freeTrack(track);
+#endif
 }
