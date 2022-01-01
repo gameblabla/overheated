@@ -103,7 +103,7 @@ int spawnObjTable( spawnTable *table , unsigned stageLine , int stoppable)
 	if( table->line > stageLine)
 		return 0;
 
-	register i = table->num-1;
+	int32_t i = table->num-1;
 	for( ; i >= 0 ; i--)
 		spawnObj(table->spawns+i);
 

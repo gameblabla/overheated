@@ -377,7 +377,7 @@ void gaucer( GameObject *object)
 
     //Shoot the round bullets!
 	SDL_Rect bulletPos;
-	register i;
+	uint_fast32_t i;
 	for(i = 0 ; i < GAUCER_ROUND_BULLETS ; i++)
 	{
             bulletPos.x = object->pos.x + bullets_dir[objAttributes->roundType][i*2] * GAUCER_BURST_RADIUS;
@@ -1728,7 +1728,9 @@ void newMidBossPart( GameObject *object , int part)
 void makeMidBossPart(SDL_Rect pos , int part)
 {
     if(part >= MID_BOSS_PARTS_NUM)
+    {
         return;
+    }
 
 	GameObject *newObjPtr;
 	GmObjectAnim enemyAnim = { midBossPartTile[part] , 0 , 0 , 0 , 0 , 0 };

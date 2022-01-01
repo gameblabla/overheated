@@ -87,7 +87,7 @@ Uint32 SDL_getPixel( SDL_Surface *source , unsigned x , unsigned y)
 }
 
 //------------------------------------------------
-
+/*
 int SDL_zoom( SDL_Surface *source , SDL_Surface *dest 
              , SDL_Rect *destRect ,unsigned zoom)
 {
@@ -108,8 +108,9 @@ int SDL_zoom( SDL_Surface *source , SDL_Surface *dest
 
     SDL_Rect defaultRect = { 0 , 0 , 0 , 0};
     if( NULL == destRect)
+    {
         destRect = &defaultRect;
-
+	}
 	SDL_LockSurface(dest);
 	SDL_LockSurface(source);
 
@@ -118,7 +119,7 @@ int SDL_zoom( SDL_Surface *source , SDL_Surface *dest
             destPixelRow += dest->w * destRect->y;
 	Uint32 *destPixel = NULL;
 	Uint32 *destPixelp = NULL; //Destination pixel pointer
-	register int y,x,a,b;
+	int32_t y,x,a;
 	for( y = 0 ;
 		 y < source->h;
 		 y++ , destPixelRow += zoom*dest->w , srcPixelRow += source->w
@@ -135,18 +136,17 @@ int SDL_zoom( SDL_Surface *source , SDL_Surface *dest
                 *(destPixelp+a) = *(srcPixelRow+x);
 			}
 		}
-        /*Duplicate lines*/
+        //Duplicate lines
         for( a = 1 ; a < zoom ; a++)
         {
-            memcpy (  destPixelRow + a*dest->w  , destPixelRow 
-                    , sizeof(Uint32)* (dest->w-destRect->x));
+            memcpy (  destPixelRow + a*dest->w  , destPixelRow , sizeof(Uint32)* (dest->w-destRect->x));
         }
 	}
 	SDL_UnlockSurface(dest);
 	SDL_UnlockSurface(source);
 
 	return 0;
-}
+}*/
 
 //------------------------------------------------
 #if !defined(NO_OPT_IMG)
@@ -210,6 +210,7 @@ SDL_Surface *SDL_fadeSurface( SDL_Surface *mask , int value , SDL_Surface *dest)
 
 int check_SDL_Version(void)
 {
+#ifndef DREAMCAST
     const SDL_version* runtimeVer = SDL_Linked_Version();
 
     SDL_version compiledVer;
@@ -237,7 +238,7 @@ int check_SDL_Version(void)
                           "don't match with the runtime version\n\n");
         return 1;
     }
-
+#endif
     return 0;    
 }
 
@@ -246,7 +247,7 @@ createScanLineMask
 SDL_Rect maskRect = Mask dimensions
 int value = Intensity value
 *********************************************/
-
+#ifndef DREAMCAST
 SDL_Surface *createScanLineMask( SDL_Rect maskRect , int value)
 {
     SDL_Surface *mask;
@@ -270,3 +271,4 @@ SDL_Surface *createScanLineMask( SDL_Rect maskRect , int value)
     /**/
     return mask;
 }
+#endif

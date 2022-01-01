@@ -35,20 +35,48 @@
 //
 #ifdef DREAMCAST
 #include <kos.h>
+#include <dc/sound/sound.h>
+#include <dc/sound/sfxmgr.h>
+
+#ifdef ADX_PLAY
 #include <libadx/libadx.h> /* ADX Decoder Library */
 #include <libadx/snddrv.h> /* Direct Access to Sound Driver */
+#endif
+#ifdef OPUS_DC
+#include <opusplay/opusplay.h>
+#endif
+
 #endif
 
 #include "music.h"
 #include "l_music.h"
 #include "trackPlayer.h"
+#include "d_filePaths.h"
 
 /********************************************
     setMusicVolume
 *********************************************/
+#ifdef DREAMCAST
+int mute = 0;
+#endif
 
 void setMusicVolume(int volume)
 {
+    #ifdef DREAMCAST
+    #ifdef ADX_PLAY
+    extern snd_stream_hnd_t shnd;
+    if (shnd) snd_stream_volume(shnd, volume);
+    if (volume < 1) mute = 1;
+    else mute = 0;
+    #else
+    int left = 15;
+    if (volume > 49) left = 15;
+    else if (volume > 20) left = 10;
+    else if (volume > 10) left = 5;
+    else if (volume < 1) left = 0;
+	spu_cdda_volume(left, left);
+	#endif
+	#endif
     setTrackPlayerVolume(volume);
     return;
 }
@@ -70,6 +98,12 @@ void incMusicVolume(int amount)
 {
     int volume = getTrackPlayerVolume()+amount;
     setTrackPlayerVolume(volume);
+    #ifdef ADX_PLAY
+    extern snd_stream_hnd_t shnd;
+    if (shnd) snd_stream_volume(shnd, volume);
+    if (volume < 1) mute = 1;
+    else mute = 0;
+	#endif
 }
 
 /********************************************
@@ -80,22 +114,51 @@ int playMusicTrack(int trackNumber)
 {
 	//0 Menu, 1 2min, 2 5min
 #ifdef DREAMCAST
-	//adx_stop();
+	snd_sfx_stop_all();
+	if (mute == 1) return 0;
+	#ifdef ADX_PLAY
+	adx_stop();
 	switch(trackNumber)
 	{
 		case 0:
-			cdrom_cdda_play(1, 2, 15, CDDA_TRACKS);
-			//adx_dec( "/cd/intro.adx", 1 );
+			adx_dec( DREAMCAST_CD_PATH "intro.adx", 1 );
 		break;
 		case 1:
-			cdrom_cdda_play(2, 3, 15, CDDA_TRACKS);
-			//adx_dec( "/cd/2min.adx", 1 );
+			adx_dec( DREAMCAST_CD_PATH "2min.adx", 1 );
 		break;
 		case 2:
-			cdrom_cdda_play(3, 4, 15, CDDA_TRACKS);
-			//adx_dec( "/cd/5min.adx", 1 );
+			adx_dec( DREAMCAST_CD_PATH "5min.adx", 1 );
 		break;
 	}
+	#elif defined(OPUS_DC)
+	switch(trackNumber)
+	{
+		case 0:
+			opusplay_play_file(DREAMCAST_CD_PATH "intro.opus", 0);
+		break;
+		case 1:
+			opusplay_play_file(DREAMCAST_CD_PATH "2min.opus", 0);
+		break;
+		case 2:
+			opusplay_play_file(DREAMCAST_CD_PATH "5min.opus", 0);
+		break;
+	}
+	#else
+	switch(trackNumber)
+	{
+		case 0:
+			cdrom_cdda_play(1, 1, 0xF, CDDA_TRACKS);
+		break;
+		case 1:
+			cdrom_cdda_play(2, 2, 0xF, CDDA_TRACKS);
+		break;
+		case 2:
+			cdrom_cdda_play(3, 3, 0xF, CDDA_TRACKS);
+		break;
+	}
+	spu_cdda_volume(15, 15);
+	spu_cdda_pan(15, 15);
+	#endif
 #else
     char *filePath = getTrackFilePath(trackNumber);
     if( filePath == NULL)
@@ -116,9 +179,16 @@ int playMusicTrack(int trackNumber)
 void freeMusic(void)
 {
 #ifdef DREAMCAST
-    /* Spin down the CD */
-	//cdrom_cdda_pause();
-	//adx_stop();
+	#ifdef ADX_PLAY
+		adx_stop();
+	#elif defined(OPUS_DC)
+	    if (opusplay_is_playing())
+	    {
+			opusplay_stop();
+		}
+	#else
+		cdrom_cdda_pause();
+	#endif
 #else
     track_t *track = ejectTrack();
     if(track != NULL)

@@ -122,7 +122,7 @@ int backgroundCollision( GameObject *object , background *bg)
     colArea.y = (object->colBox.h + colPos.y % bg->tileset->tileH) / bg->tileset->tileH
                 + ((object->colBox.h + colPos.y % bg->tileset->tileH) % bg->tileset->tileH ? 1 : 0);
 
-    register i,j;
+    int32_t i,j;
     bgCoord cTile; //Current Tile
     GameObject *tileObject;
     for( i = 0 ; i < colArea.y ; i++)

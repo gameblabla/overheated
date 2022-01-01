@@ -144,7 +144,7 @@ int startGame(int type)
 {
     char filePath[128]; 
     char filePath2[128]; 
-	
+
 	//init game variables
     gameType = type;
     gameStatus = ON_GOING;
@@ -190,8 +190,8 @@ int startGame(int type)
 
 	//start the game
 	initPlayer();
-
-    playMusicTrack(modeMusicTracks[gameType]);
+	
+	freeMusic();
 
     int i;
     char *startMsg = "GET READY!";
@@ -336,6 +336,8 @@ int game(char *startMsg , int stageNumber)
 	int espSpawnInd = 0;	//SPecial spawn index
 	int i=0;
 	int tmpInt= 0;
+	
+	playMusicTrack(modeMusicTracks[gameType]);
 
     //Main loop
 	while(gameStatus >= 0)

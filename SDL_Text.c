@@ -128,7 +128,7 @@ void SDL_TextExpansion (char *str , struct bmFont *cfont , int xPadding , int yP
 	//Character tile in the bitmap
 	SDL_Rect chTile = cfont->size;
     
-	register unsigned int a , chrTile;
+	unsigned int a , chrTile;
 
 	for(a= 0 ; a < strlen(str) ; a++)
 	{

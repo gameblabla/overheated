@@ -61,6 +61,9 @@ static int replaying;
 int initInputSystem(void)
 {
     loadInputConf(DREAMCAST_CD_PATH"data/config/controls.cfg" , &controlsMap );
+#ifdef DREAMCAST
+	cont_btn_callback(0, CONT_START | CONT_A | CONT_B | CONT_X | CONT_Y, (cont_btn_callback_t)arch_reboot);
+#endif
     return 0;
 }
 
@@ -101,16 +104,14 @@ void initController( controllerStruct *controller)
     readJoypad:
     Read player input
 **********************************************/
-
-
 int readJoypad(joypadStruct *controller)
 {
 #ifdef DREAMCAST
-    int ret=0;
-    maple_device_t *cont;
-	cont_state_t *state;		
-    cont = maple_enum_type(0, MAPLE_FUNC_CONTROLLER);
-    
+	static maple_device_t *cont, *kbd,  *mouse;
+	mouse_state_t *mstate;
+	kbd_state_t* first_kbd_state; 
+	cont_state_t *state;	
+	uint_fast8_t i;
     controller->UP = 0;
     controller->DOWN = 0;
     controller->LEFT = 0;
@@ -119,12 +120,10 @@ int readJoypad(joypadStruct *controller)
 	controller->A = 0;
 	controller->B = 0;
 	controller->SELECT = 0;
-	
+    
 	if(cont)
 	{
 		state = (cont_state_t *)maple_dev_status(cont);
-		if (!state)
-			ret = 0;
 		if (state->buttons & CONT_START)
             controller->START = 1;              
 		if (state->buttons & CONT_X)
@@ -133,15 +132,69 @@ int readJoypad(joypadStruct *controller)
             controller->A = 1;
 		if (state->buttons & CONT_B) 
             controller->B = 1;
-		if (state->buttons & CONT_DPAD_UP) 
+		if (state->buttons & CONT_DPAD_UP || state->joyy < -64) 
             controller->UP = 1;
-		if (state->buttons & CONT_DPAD_DOWN) 
+		if (state->buttons & CONT_DPAD_DOWN || state->joyy > 64) 
             controller->DOWN = 1;
-		if (state->buttons & CONT_DPAD_LEFT) 
+		if (state->buttons & CONT_DPAD_LEFT || state->joyx < -64) 
             controller->LEFT = 1;
-		if (state->buttons & CONT_DPAD_RIGHT) 
+		if (state->buttons & CONT_DPAD_RIGHT || state->joyx > 64) 
             controller->RIGHT = 1;   
 	}
+	else if (!cont)
+	{
+		for(i=0;i<4;i++)
+		{
+			cont = maple_enum_type(i, MAPLE_FUNC_CONTROLLER);
+			if (cont) break;
+		}
+	}
+	
+	if (kbd)
+	{
+		first_kbd_state = (kbd_state_t *) maple_dev_status(kbd);
+	
+		if (first_kbd_state->matrix[KBD_KEY_UP]) controller->UP = 1;
+		else if (first_kbd_state->matrix[KBD_KEY_DOWN]) controller->DOWN = 1;
+		
+		if (first_kbd_state->matrix[KBD_KEY_LEFT]) controller->LEFT = 1;
+		else if (first_kbd_state->matrix[KBD_KEY_RIGHT]) controller->RIGHT = 1;
+		
+		if (first_kbd_state->matrix[KBD_KEY_SPACE] || first_kbd_state->matrix[KBD_KEY_X]) controller->A = 1;
+		if (first_kbd_state->matrix[KBD_KEY_C]) controller->B = 1;
+	}
+	else if (!kbd)
+	{
+		for(i=0;i<4;i++)
+		{
+			kbd = maple_enum_type(i, MAPLE_FUNC_KEYBOARD);
+			if (kbd) break;
+		}
+	}
+	
+	if(mouse)
+	{
+        mstate = (mouse_state_t *)maple_dev_status(mouse);
+        if (mstate)
+        {
+			if (mstate->dx < -1) controller->LEFT = 1;
+			else if (mstate->dx > 1) controller->RIGHT = 1;
+			if (mstate->dy < -1)  controller->UP = 1;
+			else if (mstate->dy > 1)controller->DOWN = 1;
+
+			if (mstate->buttons & MOUSE_LEFTBUTTON) controller->A = 1;
+			if (mstate->buttons & MOUSE_RIGHTBUTTON) controller->B = 1;
+		}
+	}
+	else if (!mouse)
+	{
+		for(i=0;i<4;i++)
+		{
+			mouse = maple_enum_type(i, MAPLE_FUNC_MOUSE);
+			if (mouse) break;
+		}
+	}
+
 #else
 	static SDL_Event event;
 
@@ -330,8 +383,8 @@ int joypadPressed( joypadStruct *pressed , joypadStruct rawInput , joypadStruct 
     unsigned char *uRawInput = (unsigned char *)(&rawInput);
     unsigned char *uLastFrameInput = (unsigned char *)(&lastFrameInput);
 
-    register i;
-    int bytesSize = sizeof(joypadStruct);
+    uint_fast32_t i;
+    uint_fast32_t bytesSize = sizeof(joypadStruct);
     for( i = 0 ; i < bytesSize ; i++)
     {
         *(uPressed + i) = *(uRawInput + i) ^ *(uLastFrameInput + i);
@@ -353,8 +406,8 @@ int joypadHeld( joypadStruct *held , joypadStruct rawInput , joypadStruct lastFr
     unsigned char *uRawInput = (unsigned char *) &rawInput;
     unsigned char *ulastFramePressed = (unsigned char *) &lastFramePressed;
 
-    register i;
-    int bytesSize = sizeof(joypadStruct);
+    uint_fast32_t i;
+    uint_fast32_t bytesSize = sizeof(joypadStruct);
     for( i = 0 ; i < bytesSize ; i++)
     {
         *( uHeld+i ) = *( uRawInput+i ) & (~*( ulastFramePressed+i ));
@@ -698,6 +751,7 @@ int noControllerInput( controllerStruct *controller)
 
 int  printJoypadRecordingInfo(joypadRecording *recording)
 {
+#ifndef DREAMCAST
     int i = 0;
     joypadRecordEntry *cEntry;  //Current entry
     for(cEntry = recording->record;
@@ -707,6 +761,7 @@ int  printJoypadRecordingInfo(joypadRecording *recording)
         i++;
     }
     printf("[DEBUG] Current Replay size: %d Bytes\n",i*sizeof(joypadRecordEntry));
+#endif
     return 0;
 }
 

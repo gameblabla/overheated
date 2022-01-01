@@ -169,7 +169,7 @@ void multShoot(GameObject *player)
 	SDL_Rect pos = player->pos;
 	SDL_Rect colBox;
 	void *newObjPtr;
-	register i= multShootLevels[weaponLevel][0].num-1;
+	int32_t i= multShootLevels[weaponLevel][0].num-1;
 	for( ; i >= 0 ; i--)
 	{
 		//search bullets object array for a new slot

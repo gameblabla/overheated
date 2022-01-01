@@ -63,7 +63,7 @@ void *objectSpawnFuncs[] = { &spawnSpitze , &spawnVtSpitzeR , &spawnVtSpitzeL , 
 
 void *getObjectSpawnFunc( char *objectName)
 {
-	register i = 0;
+	int32_t i = 0;
 	while( *(*objectNames+(i*OBJECT_NAME_SIZE)) != '\0')
 	{
 		if( strcmp( (char *)(*objectNames+(i*OBJECT_NAME_SIZE)) , objectName) == 0 )

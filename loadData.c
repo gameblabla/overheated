@@ -53,8 +53,10 @@
 
 extern void freeObject( GameObject *object);;
 //
+#ifndef DREAMCAST
 #define TERMINAL_ERROR_MESSAGES
 #define TERMINAL_STATUS_MESSAGES
+#endif
 
 #define SYSTEM_VARS_NUMBER 0 //See str_utils.h
 #define STR_BUFFER_MAXSIZE 100 //See str_utils.h
@@ -416,7 +418,7 @@ int loadBackgroundScript(FILE *inFp , background *bg)
 
 	int insCode;
 	int insOperandsNum;
-	register i,j;
+	int32_t i,j;
 	for(i = 0 ; i < bg->scriptSize ; i++)
 	{
 		//Load instructions number
@@ -500,7 +502,7 @@ int loadBackgroundScript(FILE *inFp , background *bg)
 void freeBackgroundScript(background *bg)
 {
 
-	register i,j;
+	int32_t i,j;
 	for(i = bg->scriptSize-1 ; i >= 0 ; i--)
 	{
 		for( j = (bg->script+i)->insNum-1 ; j >= 0 ; j--)
@@ -716,7 +718,7 @@ int loadBackground( char *filePath , background *bg)
 void freeBackground(background *bg)
 {
     //free tile objects data
-    register i;
+    uint_fast32_t i;
     for(i = 0 ; i < bg->tilemapBuffer.tilesNumber ; i++)
     {
         freeObject(bg->tilemapBuffer.tileObj+i);
@@ -1036,7 +1038,7 @@ int loadStage( char *filePath , GMstage *stage)
 //---------------------------------------------------------------------//
 void freeSpawnTable(spawnTable* spawnTable)
 {
-	register i = 0;
+	uint32_t i = 0;
 	if(spawnTable != NULL)
 	{
 		while((spawnTable+i)->spawns != NULL )
@@ -1052,7 +1054,7 @@ void freeSpawnTable(spawnTable* spawnTable)
 //---------------------------------------------------------------------//
 void freeStage( GMstage *stage)
 {
-	register i = 0;
+	uint_fast32_t i = 0;
 	//Free normal object spawn tables
     freeSpawnTable(stage->spawnTable);
 	//Free special object spawn tables
@@ -1108,11 +1110,12 @@ char *jaxisNames[JAXIS_NAMES] =
 
 int loadKeyList( FILE *inFp , char **names , int num , Uint16 **keys)
 {
+#ifndef DREAMCAST
 		systemVar_t *systemVars = NULL;
 		char finStrBuffer[STR_BUFFER_MAXSIZE]; //File string input buffer
 		char StrBuffer[STR_BUFFER_MAXSIZE]; //String buffer
 
-		register int i = 0;
+		uint_fast32_t i = 0;
 		long int fpMark = ftell(inFp);
 		for(i = 0 ; i < num ; i++)
 		{
@@ -1131,12 +1134,13 @@ int loadKeyList( FILE *inFp , char **names , int num , Uint16 **keys)
 #endif
 		}
 		fseek(inFp,fpMark,SEEK_SET);
+#endif
 		return 0;
 }
 
 int loadInputConf( char *filePath , inputConf *controlsMap)
 {
-
+#ifndef DREAMCAST
 	Uint16 *keys[]=
 	{
 		 &(controlsMap->key.UP)
@@ -1214,7 +1218,7 @@ int loadInputConf( char *filePath , inputConf *controlsMap)
 	if(controlsMap->joypad)
 	{//load configuration from file
 		loadKeyList(inFp , jButtonsNames , JBUTTONS_NAMES , jbuttons);
-		register int i;
+		uint_fast32_t i;
 		long int fpMark = ftell(inFp);
 		for(i = 0 ; i < JAXIS_NAMES ; i++)
 		{
@@ -1236,7 +1240,7 @@ int loadInputConf( char *filePath , inputConf *controlsMap)
 
 
 	fclose(inFp);
-
+#endif
 	return 0;
 }
 
@@ -1249,6 +1253,7 @@ int loadInputConf( char *filePath , inputConf *controlsMap)
 
 int loadGameCfgFile(char *filePath , gameCfgStruct *gameConfiguration)
 {
+#ifndef DREAMCAST
 	FILE *inFp;
 	if( ( inFp = fopen(filePath,"rb")) == NULL)
 	{
@@ -1374,7 +1379,7 @@ int loadGameCfgFile(char *filePath , gameCfgStruct *gameConfiguration)
     }
 
     fclose(inFp);
-    
+#endif
     return 0;
 }
 

@@ -28,6 +28,7 @@
 //
 #include <stdio.h>
 #include <stdlib.h>
+#include <stdint.h>
 #include <string.h>
 //
 #include "system_var_type.h"
@@ -125,7 +126,7 @@ int loadScoreData(FILE *inFp , scoreboard *board)
 	systemVar_t *systemVars = NULL;
 	char finStrBuffer[STR_BUFFER_MAXSIZE]; //File string input buffer
 	char StrBuffer[STR_BUFFER_MAXSIZE]; //String buffer
-    register scoreEntry;
+    int32_t scoreEntry;
     //
     char scoreName[SCORE_NAME_SIZE];
     int  scoreValue;
@@ -232,7 +233,7 @@ int freeScoreData( scoreboard *board)
 
 int freeScoreboards(void)
 {
-    register i;
+    uint_fast32_t i;
     for( i = 0 ; i < SCOREBOARDS_NUMBER ; i++)
     {
         freeScoreData( gameScoreBoards + i);
@@ -375,7 +376,6 @@ int addScoreData( scoreboard *board , char *scoreName , int scoreValue)
 
 void removeLastScore( scoreboard *board)
 {
-    register i;
     void **lastNext= &(board->first);
     scoreNode *cNode = board->first;
     while( cNode != NULL)

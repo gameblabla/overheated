@@ -26,9 +26,21 @@
 #define GLOBAL_DEFINES_H
 
 #ifdef DREAMCAST
-#define DREAMCAST_CD_PATH "/cd/"
+	#include <stddef.h>
+	#if defined(NAOMI)
+	#define DREAMCAST_CD_PATH "/rd/"
+	#else
+	#define DREAMCAST_CD_PATH "/cd/"
+	#endif
+	#define DREAMCAST_RAM_PATH "/ram/"
+	
+	extern void * memcpy_ (void *dest, const void *src, size_t len);
+	extern void * memcpy_64bit(void *dest, const void *src, size_t len);
+	extern void * memcpy_32bit_16Bytes(void *dest, const void *src, size_t len);
+	extern void * memcpy_64bit_32Bytes(void *dest, const void *src, size_t len);
 #else
 #define DREAMCAST_CD_PATH ""
+#define DREAMCAST_RAM_PATH ""
 #endif
 
 #define PERRORS //Print errors

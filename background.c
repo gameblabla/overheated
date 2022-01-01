@@ -114,7 +114,7 @@ void setTilemapObjects(background *bg)
         return;
 
     void * newObjectFunc;
-    register i,j;
+    uint_fast32_t i,j;
     for( i = 0 ; i < bg->tilemapBuffer.h ; i++)
     {
         for( j = 0 ; j < bg->tilemapBuffer.w ; j++)
@@ -168,7 +168,7 @@ void updateTileObjects(background *bg)
     void *newObjectFunc;
     GameObject *tileObject;
     Uint16 *tileAddress;
-    register i;
+    uint_fast32_t i;
     for(i = 0 ; i < bg->tilemapBuffer.w ; i++ , tileIndex++)
     {
             tileObject = bg->tilemapBuffer.tileObj + tileIndex;
@@ -208,7 +208,7 @@ void updateTileObjsPosition(background *bg)
                         , bg->scroll.tileScroll.y 
                         , 0 , 0};
 
-    register int i,j;
+	uint_fast32_t i,j;
     for( i = 0 ; i < bg->tilemapBuffer.h ; i++)
     {
         tilePos.x = 0;
@@ -249,10 +249,15 @@ void scrollBackground( background *bg)
         || bg->pos.y >= bg->tilemap.h)
         return;
 
+#ifdef DREAMCAST
+    memcpy_( M_getTileAddress(bg->tilemapBuffer,0,0,bg->scroll.rowOffset)
+           ,bg->tilemap.data + bg->pos.y * bg->tilemap.w
+           ,bg->tilemap.w * sizeof(Uint16));
+#else
     memcpy( M_getTileAddress(bg->tilemapBuffer,0,0,bg->scroll.rowOffset)
            ,bg->tilemap.data + bg->pos.y * bg->tilemap.w
            ,bg->tilemap.w * sizeof(Uint16));
-
+#endif
     if(bg->interactive == 0)
         return;
 
@@ -282,8 +287,8 @@ int drawBackground( background *bg , SDL_Surface *screen)
 
     SDL_Rect destRect;
     Uint16 *rowAddress = 0;
-    register tileValue = 0;
-	register i,j;
+    int32_t tileValue = 0;
+	int32_t i,j;
 	for( i= 0 ; i < bg->tilemapBuffer.h ; i++)
     {
         if( tileCoord.y >= screen->h)
@@ -364,8 +369,9 @@ void updateBackgroundScroll( background *bg , SDL_Surface *screen)
     drawBackground( bg , screen);
 
     if(bg->interactive)
+    {
         updateTileObjsPosition(bg);
-
+	}
 	return;
 }
 
@@ -382,7 +388,7 @@ void manageBackgroundCollisions( GameObjectArray *objsArray , background *bg)
     if(bg->interactive == 0)
         return;
     GameObject *objects = objsArray->object;
-	register objNum = objsArray->size-1;
+	int32_t objNum = objsArray->size-1;
     
     for( ; objNum > 0 ; objNum--)
     {

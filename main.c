@@ -163,9 +163,10 @@ int main(int argc , char **argv)
 		return 1;
 	}
 
+	
+	#ifndef DREAMCAST
 	//Disable cursor
 	SDL_ShowCursor(0);
-	#ifndef DREAMCAST
 	//Open joystick 0
 	SDL_JoystickOpen(0);
 	#endif

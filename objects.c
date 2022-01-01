@@ -86,7 +86,7 @@ int initObjectArray(GameObjectArray *objArray , int  size)
 	initObjects( objArray->object , size);
 
 	//init free objects array
-	register i;
+	int i;
 	for(i = size-1; i >= 0 ; i--)
 		*(objArray->freeObjStack+i) = objArray->object+i;
 
@@ -299,8 +299,8 @@ void freeNobjects( GameObject *objects , int num)
 
 void manageObjectsCollisions( GameObject *objects1 , int obj1Num ,GameObject *objects2 , int obj2Num)
 {
-	register int i;
-	register int j;
+	int i;
+	int j;
 
 	for( i = obj1Num-1 ; i >= 0 ; i--)
 	{
@@ -372,9 +372,9 @@ void drawObjects( GameObjectArray *objsArray , SDL_Surface *screen)
 	GameObject *objects = objsArray->object;
 	int objNum = objsArray->size;
 
-	register charSet *ObjChrIndex;
+	charSet *ObjChrIndex;
 	SDL_Rect sprite , dest;
-	register i= 0;
+	int i= 0;
 	for( ; i < objNum ; i++)
 	{
 		ObjChrIndex = sprites_charSets.array + (objects+i)->chrData;
@@ -423,8 +423,8 @@ void manageObjectsAnim( GameObjectArray *objsArray)
 	GameObject *objects = objsArray->object;
 	int objNum = objsArray->size;
 
-	register i;
-	register GameObject  *cObject;
+	int i;
+	GameObject  *cObject;
 	for( i = objNum-1 ; i >= 0 ; i--)
 	{
 		cObject = objects+i; //Current object

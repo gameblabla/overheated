@@ -54,7 +54,9 @@
 int trackPlayerVolume = MIX_MAX_VOLUME / 2;
 
 static track_t *currentTrack = NULL;
+#ifndef DREAMCAST
 static Mix_Music *music = NULL;
+#endif
 static int playbackHalted = 1 ;
 static int playbackPaused = 0 ;
 static int trackInside = 0 ;                        //Track loaded/inside player
@@ -102,6 +104,7 @@ void addTrackSection(track_t *track ,const trackSection_t *section)
 
 track_t *loadTrack(char *filePath)
 {
+	#ifndef DREAMCAST
 	systemVar_t *systemVars = NULL;
 
 #ifdef DEBUG
@@ -204,6 +207,9 @@ track_t *loadTrack(char *filePath)
 
     fclose(inFp);
     return newTrack;
+    #else
+    return 0;
+    #endif
 }
 
 /********************************************
@@ -258,7 +264,9 @@ void pauseTrack(void)
     {
         updateSectionTicks();
         playbackPaused = 1;
+        #ifndef DREAMCAST
         Mix_PauseMusic();
+        #endif
     }
 }
 
@@ -271,7 +279,9 @@ void resumeTrack(void)
     {
         startTicks = SDL_GetTicks();
         playbackPaused = 0;
+        #ifndef DREAMCAST
         Mix_ResumeMusic();
+        #endif
     }
 }
 
@@ -294,6 +304,7 @@ void updateSectionTicks(void)
 
 void playCurrentSection(void)
 {
+	#ifndef DREAMCAST
     if( currentTrack->s_loopCounter == 0)
     {
         playbackHalted = 1;
@@ -328,6 +339,7 @@ void playCurrentSection(void)
     
     startTicks = SDL_GetTicks();
     playbackHalted = 0;
+    #endif
 }
 
 /********************************************
@@ -346,6 +358,7 @@ void decLoopCounter(int *counter)
 
 void playTrack(track_t *track)
 {
+	#ifndef DREAMCAST
     currentTrack = track;
     trackInside = 1;
     //DEV
@@ -356,6 +369,7 @@ void playTrack(track_t *track)
     {
         updateTrackPlayer();
     }
+    #endif
 }
 
 /*********************************************
@@ -363,9 +377,11 @@ void playTrack(track_t *track)
 **********************************************/
 void haltTrack(void)
 {
+	#ifndef DREAMCAST
     updateSectionTicks();
     Mix_HaltMusic();
     playbackHalted = 1;
+    #endif
     return;
 }
 
@@ -374,6 +390,7 @@ void haltTrack(void)
 /********************************************/
 track_t *ejectTrack(void)
 {
+	#ifndef DREAMCAST
     trackInside = 0;
     if( currentTrack == NULL)
         return currentTrack;
@@ -390,6 +407,9 @@ track_t *ejectTrack(void)
     currentTrack = NULL;
     //
     return track;
+    #else
+    return 0;
+    #endif
     
 }
 
@@ -444,8 +464,10 @@ void updateTrackPlayer(void)
     if( currentTrack == NULL)
         return;
 
+	#ifndef DREAMCAST
     if(Mix_PlayingMusic())
         return;
+	#endif
 
     decLoopCounter(&currentTrack->s_loopCounter);
     if(currentTrack->s_loopCounter)

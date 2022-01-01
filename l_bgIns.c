@@ -87,7 +87,7 @@ bgInsTmp bgInsList[] =
 
 int getBgInsCode( char *tag)
 {
-	register i=0;
+	int32_t i=0;
 	while( (bgInsList+i)->tag != NULL)
 	{//Search the tag
 		if( strcmp( (bgInsList+i)->tag , tag) == 0)
@@ -143,7 +143,7 @@ int execBgScript( background *bg , int frame)
 	    return 0; //Not in the line
     }
 
-	register i = cScript->insNum-1;
+	int32_t i = cScript->insNum-1;
 	for( ; i >= 0 ; i--)//execute instruction function
 	{
 		((void (*)(background *, int *))(cScript->ins+i)->func)( bg , (cScript->ins+i)->operands);

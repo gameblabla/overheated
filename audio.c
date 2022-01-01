@@ -37,6 +37,9 @@
 
 #ifdef DREAMCAST
 #include <kos.h>
+#include <dc/sound/sound.h>
+#include <dc/sound/sfxmgr.h>
+sfxhnd_t SEPool[8];
 #endif
 
 //-------------------------------------------
@@ -46,8 +49,6 @@
 #define STR_BUFFER_MAXSIZE 100 //See str_utils.h
 
 #define ERROR_HANDLING exit(-1);
-
-
 
 int sfxVolume = MIX_MAX_VOLUME; //Sound effects volume
 
@@ -98,6 +99,8 @@ int openAudio(void)
 	//Set channels volume
 	Mix_AllocateChannels(MIXER_CHANNELS_NUMBER);
 	Mix_Volume(-1, sfxVolume);
+#else
+	snd_stream_init();
 #endif
 	return 0;
 }
@@ -120,6 +123,8 @@ void closeAudio(void)
 	//Close Audio device
 	while ( Mix_QuerySpec(NULL , NULL , NULL))
 		Mix_CloseAudio();
+#else
+	snd_stream_shutdown();
 #endif
 	return ;
 }
@@ -131,9 +136,29 @@ void closeAudio(void)
       Load a list of samples onto a ChunkArray
 *********************************************/
 
+#ifdef DREAMCAST
+const char sfx_arr[8][32] =
+{
+	"/cd/data/sfx/explosion1.wav",
+	"/cd/data/sfx/powerUp.wav",
+	"/cd/data/sfx/coin.wav",
+	"/cd/data/sfx/bossWarning.wav",
+	"/cd/data/sfx/specialBonusv1.wav",
+	"/cd/data/sfx/warning.wav",
+	"/cd/data/sfx/powerDown.wav",
+	"/cd/data/sfx/playerExplosion.wav"
+};
+#endif
+
 int loadChunkArray(char *fileName , Mix_ChunkArray *array)
 {
-#ifndef DREAMCAST
+#ifdef DREAMCAST
+	int i;
+	for(i=0;i<8;i++)
+	{
+		SEPool[i] = snd_sfx_load(sfx_arr[i]); 
+	}
+#else
 	systemVar_t *systemVars = NULL;
 
 	FILE *inFp;
@@ -143,8 +168,8 @@ int loadChunkArray(char *fileName , Mix_ChunkArray *array)
 		ERROR_HANDLING
 	}
 
-	char finStrBuffer[STR_BUFFER_MAXSIZE]; //File string input buffer
-	char StrBuffer[STR_BUFFER_MAXSIZE]; //String buffer
+	char finStrBuffer[64]; //File string input buffer
+	char StrBuffer[64]; //String buffer
 
 	//Get number of samples
 	array->size = 0;
@@ -163,7 +188,6 @@ int loadChunkArray(char *fileName , Mix_ChunkArray *array)
 	{
 		FETCH_NEXT_STRING
 		READ_NEXT_STRING
-		//load sample
 		*(array->sample+i) = Mix_LoadWAV(StrBuffer);
 		if(!*(array->sample+i))
 		{
@@ -193,6 +217,7 @@ int loadChunkArray(char *fileName , Mix_ChunkArray *array)
 
 void freeChunkArray(Mix_ChunkArray *array)
 {
+// Handled directly in sfx.c for DC
 #ifndef DREAMCAST
 	if( array->sample == NULL
 	   || array->size <= 0)
@@ -200,7 +225,7 @@ void freeChunkArray(Mix_ChunkArray *array)
 		return;
 	}
 
-	register int i;
+	int32_t i;
 	for( i = array->size-1 ; i >= 0 ; i--)
 		Mix_FreeChunk(*(array->sample+i));
 
@@ -239,7 +264,11 @@ void setSFX_Volume( int volume)
 void incSFX_Volume(void)
 {
     if( sfxVolume < MIX_MAX_VOLUME)
+#ifdef DREAMCAST
+        sfxVolume+=15;
+#else
         sfxVolume++;
+#endif
 
 #ifndef DREAMCAST
 	Mix_Volume(-1, sfxVolume);
@@ -256,7 +285,11 @@ void incSFX_Volume(void)
 void decSFX_Volume(void)
 {
     if( sfxVolume > 0)
+#ifdef DREAMCAST
+        sfxVolume-=15;
+#else
         sfxVolume--;
+#endif
 
 #ifndef DREAMCAST
 	Mix_Volume(-1, sfxVolume);

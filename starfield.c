@@ -50,7 +50,7 @@ void initStar( star* star)
 ********************************************/
 void initStars( star* stars , int num)
 {
-	register i = num;
+	uint_fast32_t i = num;
 	for( ; i < num ; i++)
 		initStar(stars+i);
 }
@@ -113,7 +113,7 @@ void drawStar(SDL_Surface *starGfx , star* star , SDL_Surface *GM_SCREEN)
 
 int updateStarfield(SDL_Surface *starsGfx , SDL_Surface *GM_SCREEN , star* stars , int num)
 {
-	register i= 0;
+	uint_fast32_t i= 0;
 	for( ; i < num ; i++)
 	{
 		updateStar( stars+i);

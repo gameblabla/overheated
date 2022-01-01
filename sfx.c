@@ -31,7 +31,10 @@
 #include <stdlib.h>
 #include <string.h>
 #include <SDL/SDL.h>
+#ifndef DREAMCAST
 #include <SDL/SDL_mixer.h>
+#endif
+
 //
 #include "audio.h"
 #include "d_audio.h"
@@ -42,6 +45,14 @@
 //
 #define ERROR_HANDLING exit(-1);
 #define CHECK_SAMPLE_NUM
+
+#ifdef DREAMCAST
+#include <kos.h>
+#include <dc/sound/sound.h>
+#include <dc/sound/sfxmgr.h>
+extern sfxhnd_t SEPool[8];
+extern int sfxVolume;
+#endif
 
 //-------------------------------------------
 #ifndef DREAMCAST
@@ -56,10 +67,10 @@ Mix_ChunkArray AudioSfx; //Sound effects samples
 
 int loadAudioSfx(char *filePath)
 {
-#ifndef DREAMCAST
-	return loadChunkArray(filePath , &AudioSfx);
+#ifdef DREAMCAST
+	return loadChunkArray(filePath , NULL);
 #else
-	return 0;
+	return loadChunkArray(filePath , &AudioSfx);
 #endif
 }
 
@@ -75,6 +86,7 @@ void freeAudioSfx(void)
 #ifndef DREAMCAST
 	freeChunkArray(&AudioSfx);
 #else
+	snd_sfx_unload_all();
 #endif
 	return;
 }
@@ -88,9 +100,11 @@ void freeAudioSfx(void)
 
 void playEffect(int num)
 {
-#ifndef DREAMCAST
+#ifdef DREAMCAST
+	snd_sfx_stop(num+4);
+	snd_sfx_play_chn(num+4, SEPool[num], sfxVolume, 0x80);
+#else
 	static int channelNum = 0;
-
 #ifdef CHECK_SAMPLE_NUM
 	if( num >= AudioSfx.size)
 		return;
@@ -115,13 +129,12 @@ void playEffect(int num)
 
 void playAnnouncement(int num)
 {
-#ifndef DREAMCAST
+#ifdef DREAMCAST
+	snd_sfx_stop(MIXER_ANNOUNCER_CHANEL);
+	snd_sfx_play_chn(MIXER_ANNOUNCER_CHANEL, SEPool[num], sfxVolume, 0x80);
+#else
 	Mix_HaltChannel( MIXER_ANNOUNCER_CHANEL );
 	Mix_PlayChannel( MIXER_ANNOUNCER_CHANEL , *(AudioSfx.sample+num) , 0);
 #endif
 	return;
 }
-
-
-
-

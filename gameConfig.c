@@ -177,9 +177,9 @@ int loadGameCfg(void)
 	if(access( configPath, F_OK ) == -1)  mkdir(configPath, 0755);
 #elif defined(DREAMCAST)
 	snprintf(config_gamepath, sizeof(config_gamepath), "/ram");
-	snprintf(dataPath, sizeof(dataPath), "/cd/data", config_gamepath);
-	snprintf(scorePath, sizeof(scorePath), "/ram", config_gamepath);
-	snprintf(replayPath, sizeof(replayPath), "/cd/data/replay", config_gamepath);
+	snprintf(dataPath, sizeof(dataPath), "/cd/data");
+	snprintf(scorePath, sizeof(scorePath), "/ram");
+	snprintf(replayPath, sizeof(replayPath), "/cd/data/replay");
 	snprintf(configPath, sizeof(configPath), "/ram");
 	mkdir("/ram/data", 0755);
 	mkdir("/ram/data/score", 0755);
@@ -224,8 +224,13 @@ int loadGameCfg(void)
 #endif
 
     /*Config audio subsystem*/
+    #ifdef DREAMCAST
+    setSFX_Volume(255);
+    setMusicVolume(255);
+    #else
     setSFX_Volume(gameConfiguration.SFX_Volume);
     setMusicVolume(gameConfiguration.MUS_Volume);
+    #endif
 
     return 0;
 }
@@ -239,6 +244,7 @@ int loadGameCfg(void)
 
 int saveGameCfg(void)
 {
+#ifndef DREAMCAST
     //Retrieve current volume values
     gameConfiguration.SFX_Volume = getSFX_Volume();
     gameConfiguration.MUS_Volume = getMusicVolume();
@@ -297,6 +303,7 @@ int saveGameCfg(void)
     
 
     fclose( outFp);
+#endif
     return 0;
 }
 

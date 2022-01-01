@@ -49,6 +49,10 @@
 #include "staffRoll.h"
 #include "sleep_delay.h"
 
+#ifdef DREAMCAST
+#include <kos.h>
+#endif
+
 #define STRBUFFER_MAX_SIZE 50
 
 #define DRAW_OPTION(x)\
@@ -82,7 +86,9 @@ char *optionsStr[]=
 		, "SERVICE"
 		, "SCORE"
 		, "STAFF ROLL"
+#ifndef DREAMCAST
 		, "EXIT"
+#endif
 		, NULL
 	};
 
@@ -95,28 +101,17 @@ int menu(void)
 							GM_SCREEN_W, GM_SCREEN_H , SCREEN_BPP, 
 							0, 0, 0, 0);
 
-	#ifdef DEBUG
-	printf("[DEBUG] MENU()\n");
-	#endif
-
 	SDL_Surface *background = SDL_LoadBMP(DREAMCAST_CD_PATH"data/gfx/menu/background.bmp");
 	if(!background)
 	{
 		fprintf(stderr,"[ERROR] loading menu background.bmp\n");
 		exit(1);
 	}
-	
-	#ifdef DEBUG
-	printf("[DEBUG] BACKGROUND()\n");
-	#endif
 
 	SDL_BlitSurface(background , NULL , bgBuffer , NULL);
 	SDL_FreeSurface(background);
 
 	bmFont menuFont;
-	#ifdef DEBUG
-	printf("[DEBUG] loadBmFont()\n");
-	#endif
 	loadBmFont(DREAMCAST_CD_PATH"data/gfx/fonts/cell_phone.font" , &menuFont);
 
 	int menu_status = 0;
@@ -126,9 +121,6 @@ int menu(void)
 
 	SDL_Event event;
 	controllerStruct controller;
-	#ifdef DEBUG
-	printf("[DEBUG] initController()\n");
-	#endif
 	initController(&controller);
 
 	int optionX;
@@ -139,16 +131,7 @@ int menu(void)
 
 	//MENU INTRODUCTION ANIMATION
 	//(...)
-	
-	#ifdef DEBUG
-	printf("[DEBUG] ABOUT TO PLAY TRACK\n");
-	#endif
-	
     playMusicTrack(INTRO_TRACK);
-    
-	#ifdef DEBUG
-	printf("[DEBUG] TRACK SUCEEDED\n");
-	#endif
 
 	while(!menu_status)
 	{   
@@ -208,8 +191,10 @@ int menu(void)
                     case STAFF_ROLL:
                          staffRoll();
                     break;
-				    case EXIT_MODE:
-					     exit(1);
+				    #ifndef DREAMCAST
+					case EXIT_MODE:
+						exit(1);
+					#endif
 			    }
                 continue;
             }

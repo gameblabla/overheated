@@ -40,6 +40,9 @@
 #include "SDL_utils.h"
 #ifdef DREAMCAST
 #include <SDL/SDL_dreamcast.h>
+#ifdef OPUS_DC
+#include <opusplay/opusplay.h>
+#endif
 #endif
 
 //
@@ -49,7 +52,7 @@ videoConf_t videoConf = //Video configuration structure
 {/*Default conf*/
      320 //X
     ,240 //Y
-    ,2   //Scale factor
+    ,1   //Scale factor
     ,0   //Fullscreen
     ,0   //Game area X
     ,0   //Game area Y
@@ -192,6 +195,9 @@ int initVideo(void)
 {
 #ifdef DREAMCAST
 	SDL_DC_SetVideoDriver(SDL_DC_DMA_VIDEO);
+	#ifdef OPUS_DC
+	opusplay_init();
+	#endif
 #endif
 	
 	Uint32 SDL_SetVideoMode_flags = SDL_HWSURFACE | SDL_DOUBLEBUF | SDL_FULLSCREEN ;

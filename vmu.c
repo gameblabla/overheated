@@ -1,13 +1,21 @@
 #ifdef DREAMCAST
 
 #include <kos.h>
+#define ZIPPED 1
+
+#ifdef ZIPPED
 #include <zlib/zlib.h> //vmu compression!
+// Tweak this according to your app
+#define ZLIB_TEMP_SPACE 524288 / 2
+#endif
 #include "dreamcast_icon.h"
 
 int DC_LoadVMU(char* filetoload, char* RAM) {
 
-    unsigned long unzipsize;
+#ifdef ZIPPED
+	unsigned long unzipsize;
     uint8* unzipdata;
+#endif
     vmu_pkg_t pkg;
 	char tm[64];
 
@@ -32,10 +40,12 @@ int DC_LoadVMU(char* filetoload, char* RAM) {
     // Remove VMU header
     vmu_pkg_parse(fs_mmap(fd), &pkg);
 
+	#ifdef ZIPPED
     // Allocate memory for the uncompressed data
-    unzipdata = (uint8 *)malloc(524288); //512KB
-    unzipsize = 524288;
+    unzipdata = (uint8 *)malloc(ZLIB_TEMP_SPACE);
+    unzipsize = ZLIB_TEMP_SPACE;
     uncompress(unzipdata, &unzipsize, (uint8 *)pkg.data, pkg.data_len);
+    #endif
 
     // Save buffer into a RAM file
     fs_close(fd);
@@ -46,11 +56,17 @@ int DC_LoadVMU(char* filetoload, char* RAM) {
         printf("Can't create RAM file from VMU.\n");
         return -1;
     }
+    #ifdef ZIPPED
     fs_write(fd2, unzipdata, unzipsize);
+    #else
+    fs_write(fd2, (uint8 *)pkg.data, pkg.data_len);
+    #endif
     fs_close(fd2);
-
+    
+#ifdef ZIPPED
     // Free unused memory
     free(unzipdata);
+#endif
 
     return 0;
 }
@@ -63,16 +79,14 @@ int DC_SaveVMU(char* filetosave, char* namevmu_save, char* description)
     file_t ft;
     char tm[64];
     
-    #ifdef DEBUG
-    printf("SaveVMU\n");
-    #endif
-
     // Temporal for reading the file
     file_t file;
     int data_size;
-    unsigned long zipsize = 0;
     uint8 *datasave;
+	#ifdef ZIPPED
     uint8 *zipdata;
+    unsigned long zipsize = 0;
+    #endif
 	
     // Open file and copy to buffer
     file = fs_open(filetosave, O_RDONLY);
@@ -81,12 +95,14 @@ int DC_SaveVMU(char* filetosave, char* namevmu_save, char* description)
     fs_read(file, datasave, data_size);
     fs_close(file);
     
+    #ifdef ZIPPED
     // Allocate some memory for compression
     zipsize = data_size * 2;
     zipdata = (uint8*)malloc(zipsize);
 
     // The compressed save
     compress(zipdata, &zipsize, datasave, data_size);
+    #endif
 
     // Make the package to the VMU.
     strcpy(pkg.desc_short, description);
@@ -97,8 +113,13 @@ int DC_SaveVMU(char* filetosave, char* namevmu_save, char* description)
     pkg.icon_data = (const uint8*)&vmu_savestate_data;
     pkg.icon_anim_speed = 0;
     pkg.eyecatch_type = VMUPKG_EC_NONE;
+    #ifdef ZIPPED
     pkg.data_len = zipsize;
     pkg.data = zipdata;
+    #else
+    pkg.data_len = data_size;
+    pkg.data = datasave;
+    #endif
     vmu_pkg_build(&pkg, &pkg_out, &pkg_size);
 
     // Write at A1, A2, A3, A4 port
@@ -127,17 +148,13 @@ int DC_SaveVMU(char* filetosave, char* namevmu_save, char* description)
 
     fs_write(ft, pkg_out, pkg_size);
     fs_close(ft);
-    
-	#ifdef DEBUG
-	printf("Path : %s\n", tm);
-	printf("NameVMU : %s\n", namevmu_save);
-	printf("File written ? \n");
-	#endif
 
     // Free unused memory
     free(pkg_out);
     free(datasave);
+    #ifdef ZIPPED
     free(zipdata);
+    #endif
 	
     return 0;
 }

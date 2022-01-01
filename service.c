@@ -243,13 +243,13 @@ int serviceMenu(void)
         {
             //Change music volume
             case OPTION_MUS_VOL:
-                
-                if(controller.pressed.LEFT)
-                    incMusicVolume(-1);
-                
-                else if(controller.pressed.RIGHT)
-                    incMusicVolume(1);
-                
+#ifdef DREAMCAST
+                if(controller.pressed.LEFT) incMusicVolume(-15);
+                else if(controller.pressed.RIGHT)incMusicVolume(15);
+#else
+                if(controller.pressed.LEFT) incMusicVolume(-1);
+                else if(controller.pressed.RIGHT) incMusicVolume(1);
+#endif
             break;
 
             //Change sfx volume
