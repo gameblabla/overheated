@@ -40,7 +40,7 @@ void Sleep_Delay()
 	#ifndef NODELAY
 	if(sleep_delay > 0)
 	{
-		SDL_Delay( sleep_delay );
+		thd_sleep( sleep_delay );
 	}
 	#endif
 }

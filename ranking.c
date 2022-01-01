@@ -126,7 +126,7 @@ int rankingScreen(void)
 		//Read controller input
         readController(&controller);
 
-        if(    controller.pressed.START
+        if(    (controller.pressed.START || controller.pressed.A)
             && CHART_FULLY_EXPANDED == menu_status )
         {
             menu_status = CHART_COMPRESSING;

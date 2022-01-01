@@ -85,8 +85,8 @@ char *optionsStr[]=
         , "5 MINUTES REPLAY"
 		, "SERVICE"
 		, "SCORE"
-		, "STAFF ROLL"
 #ifndef DREAMCAST
+		, "STAFF ROLL"
 		, "EXIT"
 #endif
 		, NULL
@@ -94,6 +94,7 @@ char *optionsStr[]=
 
 int menu(void)
 {
+	uint_fast16_t delay_input = 0;
     SDL_Surface *screen = getVideoScreen();
     SDL_Surface *gameFb = getGameFb();
 	//Menu Background buffer
@@ -125,7 +126,6 @@ int menu(void)
 
 	int optionX;
 	int optionY;
-
     enum {DEMO_DELAY = 40 * FPS};
     long demoDelay = DEMO_DELAY;
 
@@ -150,12 +150,19 @@ int menu(void)
                     startGame(TWO_MINUTES_REPLAY);
                 else
                     startGame(FIVE_MINUTES_REPLAY);
-                RETURN(0)            
+                
+                /* Gameblabla - This would normally exit the game after replay is done.
+                 * This is a strange decision on the creator's part, thus i have decided to disable it. */
+                #if 0
+                RETURN(0)
+                #endif
             }        
         }
         else
         { /*INPUT*/
             demoDelay = DEMO_DELAY;
+            if (delay_input < 30) delay_input++;
+            
             if(controller.pressed.LEFT)
 		    {
                 if(select != 0)
@@ -166,7 +173,7 @@ int menu(void)
                 if(optionsStr[select+1] != NULL)
                     select++;
             }
-		    else if(controller.pressed.START)
+		    else if((controller.pressed.START || controller.pressed.A) && delay_input > 20)
 		    {
                 switch(select)
 			    {
@@ -188,10 +195,10 @@ int menu(void)
                     case SERVICE:
                          serviceMenu();
                     break;
+                    #ifndef DREAMCAST
                     case STAFF_ROLL:
                          staffRoll();
                     break;
-				    #ifndef DREAMCAST
 					case EXIT_MODE:
 						exit(1);
 					#endif

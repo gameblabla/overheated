@@ -10,7 +10,7 @@
 #endif
 #include "dreamcast_icon.h"
 
-int DC_LoadVMU(char* filetoload, char* RAM) {
+uint_fast8_t DC_LoadVMU(char* filetoload, char* RAM) {
 
 #ifdef ZIPPED
 	unsigned long unzipsize;
@@ -34,7 +34,7 @@ int DC_LoadVMU(char* filetoload, char* RAM) {
 	if ((fd = fs_open(tm, O_RDONLY)) == -1)
 	{
 		printf("error load save from VMUs, not found.\n");
-		return -1;
+		return 0;
 	}
     
     // Remove VMU header
@@ -54,7 +54,7 @@ int DC_LoadVMU(char* filetoload, char* RAM) {
     if ((fd2 = fs_open(RAM, O_WRONLY)) == -1)
     {
         printf("Can't create RAM file from VMU.\n");
-        return -1;
+        return 0;
     }
     #ifdef ZIPPED
     fs_write(fd2, unzipdata, unzipsize);
@@ -68,10 +68,10 @@ int DC_LoadVMU(char* filetoload, char* RAM) {
     free(unzipdata);
 #endif
 
-    return 0;
+    return 1;
 }
 
-int DC_SaveVMU(char* filetosave, char* namevmu_save, char* description)
+uint_fast8_t DC_SaveVMU(char* filetosave, char* namevmu_save, char* description)
 {
     vmu_pkg_t pkg;
     uint8 *pkg_out;
@@ -143,7 +143,7 @@ int DC_SaveVMU(char* filetosave, char* namevmu_save, char* description)
 	ft = fs_open(tm, O_WRONLY);
     if (!ft) {
 		printf("Couldn't write save to any VMU\n");
-        return -1;
+        return 0;
     }
 
     fs_write(ft, pkg_out, pkg_size);
@@ -156,6 +156,6 @@ int DC_SaveVMU(char* filetosave, char* namevmu_save, char* description)
     free(zipdata);
     #endif
 	
-    return 0;
+    return 1;
 }
 #endif

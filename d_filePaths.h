@@ -36,6 +36,8 @@
 #ifdef DREAMCAST
 #define TWO_MINMODE_REPLAY_FILE "2.rep"
 #define FIVE_MINMODE_REPLAY_FILE "5.rep"
+#define TWO_MINMODE_REPLAY_FILE_READ_ONLY "data/replay/twoMinMode.replay"
+#define FIVE_MINMODE_REPLAY_FILE_READ_ONLY "data/replay/fiveMinMode.replay"
 #else
 #define TWO_MINMODE_REPLAY_FILE "data/replay/twoMinMode.replay"
 #define FIVE_MINMODE_REPLAY_FILE "data/replay/fiveMinMode.replay"

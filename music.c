@@ -57,7 +57,8 @@
     setMusicVolume
 *********************************************/
 #ifdef DREAMCAST
-int mute = 0;
+static uint_fast8_t mute = 0;
+static uint_fast8_t cd_vol = 15;
 #endif
 
 void setMusicVolume(int volume)
@@ -70,11 +71,10 @@ void setMusicVolume(int volume)
     else mute = 0;
     #else
     int left = 15;
-    if (volume > 49) left = 15;
-    else if (volume > 20) left = 10;
-    else if (volume > 10) left = 5;
-    else if (volume < 1) left = 0;
+    if (volume > 254) left = 15;
+    else left = volume * 0.058;
 	spu_cdda_volume(left, left);
+	cd_vol = left;
 	#endif
 	#endif
     setTrackPlayerVolume(volume);
@@ -121,7 +121,7 @@ int playMusicTrack(int trackNumber)
 	switch(trackNumber)
 	{
 		case 0:
-			adx_dec( DREAMCAST_CD_PATH "intro.adx", 1 );
+			adx_dec( DREAMCAST_CD_PATH "intro.adx", 0 );
 		break;
 		case 1:
 			adx_dec( DREAMCAST_CD_PATH "2min.adx", 1 );
@@ -147,7 +147,7 @@ int playMusicTrack(int trackNumber)
 	switch(trackNumber)
 	{
 		case 0:
-			cdrom_cdda_play(1, 1, 0xF, CDDA_TRACKS);
+			cdrom_cdda_play(1, 1, 0, CDDA_TRACKS);
 		break;
 		case 1:
 			cdrom_cdda_play(2, 2, 0xF, CDDA_TRACKS);
@@ -156,8 +156,8 @@ int playMusicTrack(int trackNumber)
 			cdrom_cdda_play(3, 3, 0xF, CDDA_TRACKS);
 		break;
 	}
-	spu_cdda_volume(15, 15);
-	spu_cdda_pan(15, 15);
+	spu_cdda_volume(cd_vol, cd_vol);
+	spu_cdda_pan(cd_vol, cd_vol);
 	#endif
 #else
     char *filePath = getTrackFilePath(trackNumber);

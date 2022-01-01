@@ -1,3 +1,4 @@
+#include <stdint.h>
 
-extern int DC_LoadVMU(char* filetoload, char* RAM);
-extern int DC_SaveVMU(char* filetosave, char* namevmu_save, char* description);
+extern uint_fast8_t DC_LoadVMU(char* filetoload, char* RAM);
+extern uint_fast8_t DC_SaveVMU(char* filetosave, char* namevmu_save, char* description);

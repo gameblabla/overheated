@@ -108,7 +108,7 @@ int musicTest(SDL_Surface *screen)
 		{
 
 		}
-		else if(controller.pressed.START)
+		else if(controller.pressed.START || controller.pressed.A)
 		{
             ;
 		}

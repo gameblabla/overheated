@@ -291,7 +291,7 @@ int saveScoreboard( int boardNumber)
     
 #ifdef DREAMCAST
 	printf("VMU save score\n");
-	DC_SaveVMU(scoreBoardsPath[boardNumber], scoreBoardsPath[boardNumber], "SCOREBOARD");
+	DC_SaveVMU(filePath, scoreBoardsPath[boardNumber], "SCOREBOARD");
 #endif
 
     

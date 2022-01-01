@@ -105,7 +105,7 @@ int playerNameInput( unsigned char *name , unsigned *nameChr , joypadStruct *con
             if( name[*nameChr] < FIRST_CHAR_VALUE)
                 name[*nameChr] =  LAST_CHAR_VALUE;
         }
-        else if(controller->START)
+        else if(controller->START || controller->B)
         {   //Add the score to the table and end
             if(name[0] != '\0')
                 return INPUT_DONE;

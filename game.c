@@ -111,6 +111,17 @@ static char *modeReplayFiles[] =
     ,FIVE_MINMODE_REPLAY_FILE 
 };
 
+#ifdef DREAMCAST
+static char *modeReplayFiles_rd[] =
+{
+     "INVALID MODE"
+    ,TWO_MINMODE_REPLAY_FILE_READ_ONLY
+    ,FIVE_MINMODE_REPLAY_FILE_READ_ONLY
+    ,TWO_MINMODE_REPLAY_FILE_READ_ONLY
+    ,FIVE_MINMODE_REPLAY_FILE_READ_ONLY
+};
+#endif
+
 static int modeMusicTracks[] = 
 {
      -1              // INVALID MODE
@@ -175,7 +186,11 @@ int startGame(int type)
 		snprintf(filePath2, sizeof(filePath2), "%s/%s", filePath, modeReplayFiles[gameType]);
 		
 #ifdef DREAMCAST
-		DC_LoadVMU(modeReplayFiles[gameType], filePath2);
+		if (DC_LoadVMU(modeReplayFiles[gameType], filePath2) == 0)
+		{
+			/* Fallback to built-in replays if it fails */
+			snprintf(filePath2, sizeof(filePath2), "%s/%s", "/cd/", modeReplayFiles_rd[gameType]);
+		}
 #endif
 		
         if(loadGameReplay(filePath2) != 0)
@@ -227,7 +242,7 @@ int startGame(int type)
             printf("[DEBUG] Game replay saved\n");
 #endif
 #ifdef DREAMCAST
-            DC_SaveVMU(modeReplayFiles[gameType], modeReplayFiles[gameType], "REPLAY FILE");
+            DC_SaveVMU(filePath2, modeReplayFiles[gameType], "REPLAY FILE");
 #endif
             }
 		}
@@ -316,7 +331,8 @@ int game(char *startMsg , int stageNumber)
 
     enum { STD_GAMEOVER_FRAMES = 30*FPS, REPLAY_GAMEOVER_FRAMES= 10*FPS};
     long gameOverFrames;
-
+	long currentframe = 0;
+	
     switch(gameType)
     {
         case TWO_MINUTES_MODE:
@@ -505,12 +521,12 @@ int game(char *startMsg , int stageNumber)
 
                     //
                     gameOverScreen( "GAME OVER" , &advertsFont , gameScreen);
-			        if( controller.pressed.START
-                        || 0 == gameOverFrames )	//End the game
+			        if( ((controller.pressed.START || controller.pressed.A) && currentframe > 120)
+                        || currentframe > gameOverFrames )	//End the game
                     {
                         gameStatus = END_GAME;
                     }
-                    else gameOverFrames--;
+                    else currentframe++;
                         
 
                     break;
@@ -518,24 +534,24 @@ int game(char *startMsg , int stageNumber)
                 case TIME_UP:
 
                     gameOverScreen( "TIME UP" , &advertsFont , gameScreen);
-			        if( controller.pressed.START
-                        || 0 == gameOverFrames )	//End the game
+			        if( ((controller.pressed.START || controller.pressed.A) && currentframe > 120)
+                        || currentframe > gameOverFrames )	//End the game
                     {
                         gameStatus = END_GAME;
                     }
-                    else gameOverFrames--;
+                    else currentframe++;
         
                     break;
 
                 case MISSION_COMPLETE:
 
                     missionCompleteScreen( &advertsFont , gameScreen);
-			        if( controller.pressed.START
-                        || 0 == gameOverFrames )	//End the game
+			        if( ((controller.pressed.START || controller.pressed.A) && currentframe > 120)
+                        || currentframe > gameOverFrames )	//End the game
                     {
                         gameStatus = END_GAME;
                     }
-                    else gameOverFrames--;
+                    else currentframe++;
 
                     break;
 

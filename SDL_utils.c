@@ -87,7 +87,7 @@ Uint32 SDL_getPixel( SDL_Surface *source , unsigned x , unsigned y)
 }
 
 //------------------------------------------------
-/*
+#ifndef DREAMCAST
 int SDL_zoom( SDL_Surface *source , SDL_Surface *dest 
              , SDL_Rect *destRect ,unsigned zoom)
 {
@@ -146,7 +146,8 @@ int SDL_zoom( SDL_Surface *source , SDL_Surface *dest
 	SDL_UnlockSurface(source);
 
 	return 0;
-}*/
+}
+#endif
 
 //------------------------------------------------
 #if !defined(NO_OPT_IMG)

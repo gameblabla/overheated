@@ -8,12 +8,12 @@ SRC_C		= $(foreach dir, $(SRCDIR), $(wildcard $(dir)/*.c))
 OBJ_C		= $(notdir $(patsubst %.c, %.o, $(SRC_C)))
 OBJS		= $(OBJ_C)
 
-CFLAGS		= -O0 -g3 -flto -I.
+CFLAGS		= -O0 -g3 -I.
 CFLAGS		+= -DGCW0 -DLINUX
 
 CXXFLAGS = $(CFLAGS)
 
-LDFLAGS     = -flto -lc -lSDL -lm -lSDL_mixer
+LDFLAGS     =  -lc -lSDL -lm -lSDL_mixer
 
 
 # Rules to make executable

@@ -1,6 +1,6 @@
 CC	= kos-cc
 
-CFLAGS = -D_SDL -DDREAMCAST -DGCW0 -DNOEXIT -DNODELAY -Ofast -fdata-sections -ffunction-sections -Isrc -std=gnu99  -DGCW0 -I. -flto
+CFLAGS = -D_SDL -DDREAMCAST -DGCW0 -DNOEXIT -Ofast -fdata-sections -ffunction-sections -Isrc -std=gnu99  -DGCW0 -I. -flto
 #LDFLAGS = -lSDL -ltremor -lm -lz
 
 # -DADX_PLAY, -lADX 

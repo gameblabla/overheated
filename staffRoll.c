@@ -89,7 +89,7 @@ int staffRoll(void)
 		Start_Sleep_Delay();
 
         readController(&controller);
-        if(controller.pressed.START)
+        if(controller.pressed.START || controller.pressed.A)
             break;
 
         clearGameFb();

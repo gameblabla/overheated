@@ -117,12 +117,20 @@ static int speedLevels[] =
     4, // Lv3
 };
 
+#ifdef DREAMCAST
+uint_fast8_t mouse_speed = 0;
+#endif
+
 int getPlayerSpeed( unsigned speedLevel)
 {
     if( speedLevel > PL_SPEED_LEVELS)
         speedLevel = PL_SPEED_LEVELS;
 
+#ifdef DREAMCAST
+    return speedLevels[speedLevel] + mouse_speed;
+#else
     return speedLevels[speedLevel];
+#endif
 }
 
 //-------------------------------------------

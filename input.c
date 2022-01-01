@@ -107,6 +107,8 @@ void initController( controllerStruct *controller)
 int readJoypad(joypadStruct *controller)
 {
 #ifdef DREAMCAST
+	#define MOUSE_SPEED_DC 3
+	extern uint_fast8_t mouse_speed;
 	static maple_device_t *cont, *kbd,  *mouse;
 	mouse_state_t *mstate;
 	kbd_state_t* first_kbd_state; 
@@ -120,6 +122,7 @@ int readJoypad(joypadStruct *controller)
 	controller->A = 0;
 	controller->B = 0;
 	controller->SELECT = 0;
+	mouse_speed = 0;
     
 	if(cont)
 	{
@@ -162,6 +165,8 @@ int readJoypad(joypadStruct *controller)
 		
 		if (first_kbd_state->matrix[KBD_KEY_SPACE] || first_kbd_state->matrix[KBD_KEY_X]) controller->A = 1;
 		if (first_kbd_state->matrix[KBD_KEY_C]) controller->B = 1;
+		
+		if (first_kbd_state->matrix[KBD_KEY_ENTER]) controller->START = 1;
 	}
 	else if (!kbd)
 	{
@@ -177,10 +182,26 @@ int readJoypad(joypadStruct *controller)
         mstate = (mouse_state_t *)maple_dev_status(mouse);
         if (mstate)
         {
-			if (mstate->dx < -1) controller->LEFT = 1;
-			else if (mstate->dx > 1) controller->RIGHT = 1;
-			if (mstate->dy < -1)  controller->UP = 1;
-			else if (mstate->dy > 1)controller->DOWN = 1;
+			if (mstate->dx < -2)
+			{
+				mouse_speed = MOUSE_SPEED_DC;
+				controller->LEFT = 1;
+			}
+			else if (mstate->dx > 2)
+			{
+				mouse_speed = MOUSE_SPEED_DC;
+				controller->RIGHT = 1;
+			}
+			if (mstate->dy < -2)
+			{
+				mouse_speed = MOUSE_SPEED_DC;
+				controller->UP = 1;
+			}
+			else if (mstate->dy > 2)
+			{
+				mouse_speed = MOUSE_SPEED_DC;
+				controller->DOWN = 1;
+			}
 
 			if (mstate->buttons & MOUSE_LEFTBUTTON) controller->A = 1;
 			if (mstate->buttons & MOUSE_RIGHTBUTTON) controller->B = 1;
@@ -623,7 +644,6 @@ int loadJoypadRecording( joypadRecording *recording , char *filePath)
     joypadStruct joypadData;
     unsigned char dataBuffer[sizeof(joypadStruct)];
     int elementsRead;
-    printf("OK\n");
     while(1)
     {
         elementsRead = fread( &dataBuffer , 1 , sizeof(joypadStruct) , fp);
