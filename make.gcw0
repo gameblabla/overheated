@@ -1,8 +1,8 @@
 #makefile for mipsel-gcc, building for GCW-ZERO
 P= Overheated
-CFLAGS= -O3 -I/opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/sysroot/usr/include/SDL -DLINUX -DGCW0
+CFLAGS= -O3 -flto -I/opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/sysroot/usr/include/SDL -DLINUX -DGCW0
 OUTFILE= -o overheated_gcw0
-LDLIBS= -L/opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/sysroot/usr/lib/ -lSDL -lSDL_mixer -lm
+LDLIBS= -L/opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/sysroot/usr/lib/ -lSDL -lSDL_mixer -lm -flto -Wl,--as-needed -s
 DEFINES=  
 CC= /opt/gcw0-toolchain/usr/bin/mipsel-gcw0-linux-uclibc-gcc
 OBJECTS= OAM.o SDL_Text.o SDL_utils.o announcer.o audio.o background.o bonus.o bullets.o cMath.o charset.o collisions.o effects.o enemies.o enemyBullet.o espEnemies.o game.o gameConfig.o gameOver.o input.o intro.o l_PLweapons.o l_bgIns.o l_music.o l_objects.o l_stages.o l_tileObjects.o l_trajectories.o license.o loadData.o main.o menu.o music.o musicTest.o nameInput.o objects.o player.o programTypes.o ranking.o score.o scoreboard.o service.o sfx.o spawn.o staffRoll.o starfield.o str_utils.o tileObjects.o time.o trackPlayer.o trajectory.o video.o weapon.o 

@@ -191,6 +191,8 @@ int startGame(int type)
 			/* Fallback to built-in replays if it fails */
 			snprintf(filePath2, sizeof(filePath2), "%s/%s", "/cd/", modeReplayFiles_rd[gameType]);
 		}
+#elif defined(LINUX)
+		snprintf(filePath2, sizeof(filePath2), "%s/%s", config_gamepath, modeReplayFiles[gameType]);
 #endif
 		
         if(loadGameReplay(filePath2) != 0)

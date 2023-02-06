@@ -1,6 +1,8 @@
 *.o
 *.x86
 *.elf
+*.gcda
+*.opk
 win/
 opk/data
 opk/trajectories
@@ -24,3 +26,6 @@ cd/*.BIN
 *.bin
 *.BIN
 *.7z
+*.cdi
+*.iso
+*.bin

@@ -40,7 +40,11 @@ void Sleep_Delay()
 	#ifndef NODELAY
 	if(sleep_delay > 0)
 	{
+		#ifdef DREAMCAST
 		thd_sleep( sleep_delay );
+		#else
+		SDL_Delay( sleep_delay );
+		#endif
 	}
 	#endif
 }
