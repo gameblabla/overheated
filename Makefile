@@ -2,13 +2,13 @@ PRGNAME     = game.elf
 CC			= gcc
 RESOURCE_FOLDER = data/
 
-SRCDIR		= .
+SRCDIR		= src
 VPATH		= $(SRCDIR)
 SRC_C		= $(foreach dir, $(SRCDIR), $(wildcard $(dir)/*.c))
 OBJ_C		= $(notdir $(patsubst %.c, %.o, $(SRC_C)))
 OBJS		= $(OBJ_C)
 
-CFLAGS		= -O0 -g3 -I.
+CFLAGS		= -O0 -g3 -Isrc -I.
 CFLAGS		+= -DGCW0 -DLINUX
 
 CXXFLAGS = $(CFLAGS)

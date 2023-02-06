@@ -2,13 +2,13 @@ PRGNAME     = index.html
 CC			= emcc
 RESOURCE_FOLDER = data/
 
-SRCDIR		= .
+SRCDIR		= src
 VPATH		= $(SRCDIR)
 SRC_C		= $(foreach dir, $(SRCDIR), $(wildcard $(dir)/*.c))
 OBJ_C		= $(notdir $(patsubst %.c, %.o, $(SRC_C)))
 OBJS		= $(OBJ_C)
 
-CFLAGS		= -O3 -g3 -I. -Ifont
+CFLAGS		= -O3 -g3 -Isrc -I.
 CFLAGS		+= -DNODELAY -DFORCE_32BPP -DNOEXIT -DNO_OPT_IMG -DGCW0 -DDEBUG
 
 CXXFLAGS = $(CFLAGS)
@@ -25,4 +25,4 @@ $(OBJ_C) : %.o : %.c
 	$(CC) $(CFLAGS) -std=gnu99 -c -o $@ $<
 
 clean:
-	rm -f $(PRGNAME) *.o
+	rm -f $(PRGNAME) *.o *.data *.wasm *.js
